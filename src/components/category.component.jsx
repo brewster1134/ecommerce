@@ -1,18 +1,21 @@
 import React from 'react'
+import { Link, withRouter } from 'react-router-dom'
 
-const Category = ({ id, title, color }) => {
-  return (
-    <div
-      className='ecommerce_category'
-      id={`cat_${id}`}
-      style={{backgroundColor: `${color}`}}
-    >
-    <div className='ecommerce__copy'>
-      <h1 className='ecommerce__title'>{title}</h1>
-      <p className='ecommerce__subtitle'>Shop Now</p>
-    </div>
-  </div>
-  )
+// import './categories.styles.sass'
+// import Category from './category.component'
+
+const Categories = props => {
+  return Object.keys(props.collections).map(collectionKey => {
+    let collection = props.collections[collectionKey]
+
+    return (
+      <Link to={`${props.category}/${collectionKey}`} key={collectionKey}>
+        <div className="collection">
+          <h3>{collection.title}</h3>
+        </div>
+      </Link>
+    )
+  })
 }
 
-export default Category
+export default withRouter(Categories)
