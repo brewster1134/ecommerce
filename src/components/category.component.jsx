@@ -1,10 +1,7 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-// import './categories.styles.sass'
-// import Category from './category.component'
-
-const Categories = props => {
+const Category = props => {
   return Object.keys(props.collections).map(collectionKey => {
     let collection = props.collections[collectionKey]
 
@@ -18,4 +15,4 @@ const Categories = props => {
   })
 }
 
-export default withRouter(Categories)
+export default Category
