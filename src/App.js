@@ -1,22 +1,27 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from "react-router-dom"
 
 import './App.css'
 
 import HomePage from './pages/home.page'
 import CategoryPage from './pages/category.page'
+import CollectionPage from "./pages/collection.page"
 
 import ShopData from './pages/shop.data'
 
 const Routes = () => (
-  <Switch>
+  <Router>
     <Route exact path="/" component={() => <HomePage data={ShopData} />} />
     <Route
+      exact
       path={`/:category`}
       component={() => <CategoryPage data={ShopData} />}
     />
-    {/* <Route path={`/:category/:collection`} component={Collection} /> */}
-  </Switch>
+    <Route
+      path={`/:category/:collection`}
+      component={() => <CollectionPage data={ShopData} />}
+    />
+  </Router>
 )
 
 const App = () => (
