@@ -7,7 +7,7 @@ import HomePage from './pages/home.page'
 import CategoryPage from './pages/category.page'
 import CollectionPage from './pages/collection.page'
 
-import StoreData from './pages/storeshop.data'
+import StoreData from './pages/store.data'
 
 const Routes = () => (
   <Router>
