@@ -1,21 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import './category.styles.sass'
 
-const Category = props => {
+const Category = (props) => {
   return (
-    <div className='category' id={`category_${props.categoryKey}`}>
-      {Object.keys(props.category.collections).map(collectionKey => {
-        const collection = props.category.collections[collectionKey]
-
+    <div className='component-category' id={`category_${props.category.route}`}>
+      {Object.entries(props.category.collections).map(([key, collection]) => {
         return (
           <Link
-            className='collection__cta'
-            to={`${props.categoryKey}/${collectionKey}`}
-            key={collectionKey}
+            to={`${props.category.route}/${collection.route}`}
+            key={collection.route}
           >
-            <div className='collection'>
-              <h3>{collection.title}</h3>
-            </div>
+            {!!props.showImage ? (
+              <img src={collection.imageUrl} alt={collection.name} />
+            ) : null}
+            <h3>{collection.name}</h3>
           </Link>
         )
       })}

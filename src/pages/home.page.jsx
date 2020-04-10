@@ -1,22 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Category from '../components/category.component'
+import './home.styles.sass'
 
-const HomePage = props => (
-  <div className='page-home'>
-    {Object.keys(props.data).map(categoryKey => {
-      const category = props.data[categoryKey]
-
-      return (
-        <section className='category' key={categoryKey}>
-          <Link className='category__cta' to={categoryKey}>
-            <h1>{category.title}</h1>
+const HomePage = (props) => {
+  return (
+    <div className='page-home'>
+      {Object.entries(props.data.categories).map(([key, category]) => (
+        <div key={key}>
+          <Link className='category__cta' to={category.route}>
+            <img src={category.imageUrl} alt={category.name} />
+            <h1>{category.name}</h1>
           </Link>
-          <Category categoryKey={categoryKey} category={category} />
-        </section>
-      )
-    })}
-  </div>
-)
+          <Category category={category} />
+        </div>
+      ))}
+    </div>
+  )
+}
 
 export default HomePage
