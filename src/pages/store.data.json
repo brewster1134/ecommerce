@@ -1,13 +1,13 @@
 {
   "categories": {
     "mens": {
+      "id": "mens",
       "name": "Mens",
-      "route": "mens",
       "imageUrl": "https://source.unsplash.com/200x200/?male,model,fashion",
       "collections": {
         "hats": {
+          "id": "hats",
           "name": "Hats",
-          "route": "hats",
           "imageUrl": "https://source.unsplash.com/200x200/?male,hat",
           "products": [
             {
@@ -58,8 +58,8 @@
           ]
         },
         "shoes": {
+          "id": "shoes",
           "name": "Shoes",
-          "route": "shoes",
           "imageUrl": "https://source.unsplash.com/200x200/?male,shoes",
           "products": [
             {
@@ -105,8 +105,8 @@
           ]
         },
         "shirts": {
+          "id": "shirts",
           "name": "Shirts",
-          "route": "shirts",
           "imageUrl": "https://source.unsplash.com/200x200/?male,shirt",
           "products": [
             {
@@ -144,13 +144,13 @@
       }
     },
     "womens": {
+      "id": "womens",
       "name": "Womens",
-      "route": "womens",
       "imageUrl": "https://source.unsplash.com/200x200/?female,hat",
       "collections": {
         "hats": {
+          "id": "hats",
           "name": "Hats",
-          "route": "hats",
           "imageUrl": "https://source.unsplash.com/200x200/?female,hat",
           "products": [
             {
@@ -201,8 +201,8 @@
           ]
         },
         "shoes": {
+          "id": "shoes",
           "name": "Shoes",
-          "route": "shoes",
           "imageUrl": "https://source.unsplash.com/200x200/?female,shoes",
           "products": [
             {
@@ -248,8 +248,8 @@
           ]
         },
         "shirts": {
+          "id": "shirts",
           "name": "Shirts",
-          "route": "shirts",
           "imageUrl": "https://source.unsplash.com/200x200/?female,shirt",
           "products": [
             {
