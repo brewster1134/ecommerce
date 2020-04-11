@@ -1,11 +1,26 @@
 .component-collection
-  > a
-    display: inline-block
-    margin-right: 1em
-  .products
-    display: grid
+  .component-collection__sub-header
+    text-align: center
+    a
+      display: inline-block
+      margin-right: 1em
+    .component-collection__collection-name
+      display: inline-block
+  .component-collection__products
     grid-template-columns: 1fr 1fr 1fr 1fr
-    img
-      width: 200px
-      height: 200px
-      object-fit: cover
+    text-align: center
+    display: grid
+    .component-collection__product
+      border-width: 0 0.1em 0.1em 0
+      border-style: solid
+      border-color: lightgray
+      padding: 0.2em
+      margin: 0.6em
+      .component-collection__product-name
+        text-align: left
+      img
+        width: 200px
+        height: 200px
+        object-fit: cover
+      .component-collection__price
+        text-align: right

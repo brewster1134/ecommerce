@@ -1,6 +1,7 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import Category from '../components/category.component'
+import { withRouter } from 'react-router-dom'
+
+import CategoryComponent from '../components/category.component.jsx'
 import './category.styles.sass'
 
 const CategoryPage = (props) => {
@@ -8,12 +9,9 @@ const CategoryPage = (props) => {
 
   return (
     <div className='page-category'>
-      <Link to='/' key='home'>
-        <h1>Home</h1>
-      </Link>
-
+      <h2>{category.name}</h2>
       <div className='category' id={`category_${props.match.params.category}`}>
-        <Category category={category} showImage={true} />
+        <CategoryComponent category={category} showImage={true} />
       </div>
     </div>
   )

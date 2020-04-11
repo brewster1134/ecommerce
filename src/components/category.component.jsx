@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import './category.styles.sass'
 
-const Category = (props) => (
+const CategoryComponent = (props) => (
   <div className='component-category' id={`category_${props.category.id}`}>
     {Object.entries(props.category.collections).map(([key, collection]) => {
       return (
@@ -17,4 +18,4 @@ const Category = (props) => (
   </div>
 )
 
-export default Category
+export default CategoryComponent

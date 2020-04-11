@@ -1,6 +1,7 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import Collection from '../components/collection.component'
+import { withRouter } from 'react-router-dom'
+
+import CollectionComponent from '../components/collection.component.jsx'
 
 const CollectionPage = (props) => {
   const category = props.data.categories[props.match.params.category]
@@ -8,12 +9,8 @@ const CollectionPage = (props) => {
 
   return (
     <div className='page-collection'>
-      <Link to='/' key='home'>
-        <h2>Home</h2>
-      </Link>
-
-      <Collection
-        categoryName={props.match.params.category}
+      <CollectionComponent
+        categoryName={category.name}
         collection={collection}
       />
     </div>

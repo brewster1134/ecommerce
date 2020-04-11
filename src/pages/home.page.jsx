@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Category from '../components/category.component'
+
 import './home.styles.sass'
+import CategoryComponent from '../components/category.component.jsx'
 
 const HomePage = (props) => (
   <div className='page-home'>
@@ -9,9 +10,9 @@ const HomePage = (props) => (
       <div key={key}>
         <Link className='category__cta' to={category.id}>
           <img src={category.imageUrl} alt={category.name} />
-          <h1>{category.name}</h1>
+          <h2>{category.name}</h2>
         </Link>
-        <Category category={category} />
+        <CategoryComponent category={category} />
       </div>
     ))}
   </div>
