@@ -11,13 +11,16 @@ import StoreData from './pages/store.data.json'
 const App = () => (
   <div className='ecommerce'>
     <HeaderComponent />
+
     <Switch>
       <Route exact path='/' component={() => <HomePage data={StoreData} />} />
+
       <Route
         exact
         path={`/:category`}
         component={() => <CategoryPage data={StoreData} />}
       />
+
       <Route
         exact
         path={`/:category/:collection`}

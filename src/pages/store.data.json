@@ -3,12 +3,12 @@
     "mens": {
       "id": "mens",
       "name": "Mens",
-      "imageUrl": "https://source.unsplash.com/200x200/?male,model,fashion",
+      "imageUrl": "https://source.unsplash.com/600x200/?male,model,fashion",
       "collections": {
         "hats": {
           "id": "hats",
           "name": "Hats",
-          "imageUrl": "https://source.unsplash.com/200x200/?male,hat",
+          "imageUrl": "https://source.unsplash.com/300x300/?male,hat",
           "products": [
             {
               "name": "Brown Brim",
@@ -60,7 +60,7 @@
         "shoes": {
           "id": "shoes",
           "name": "Shoes",
-          "imageUrl": "https://source.unsplash.com/200x200/?male,shoes",
+          "imageUrl": "https://source.unsplash.com/300x300/?male,shoes",
           "products": [
             {
               "name": "Adidas NMD",
@@ -107,7 +107,7 @@
         "shirts": {
           "id": "shirts",
           "name": "Shirts",
-          "imageUrl": "https://source.unsplash.com/200x200/?male,shirt",
+          "imageUrl": "https://source.unsplash.com/300x300/?male,shirt",
           "products": [
             {
               "name": "Camo Down Vest",
@@ -146,12 +146,12 @@
     "womens": {
       "id": "womens",
       "name": "Womens",
-      "imageUrl": "https://source.unsplash.com/200x200/?female,hat",
+      "imageUrl": "https://source.unsplash.com/600x200/?female,hat",
       "collections": {
         "hats": {
           "id": "hats",
           "name": "Hats",
-          "imageUrl": "https://source.unsplash.com/200x200/?female,hat",
+          "imageUrl": "https://source.unsplash.com/300x300/?female,hat",
           "products": [
             {
               "name": "Brown Brim",
@@ -203,7 +203,7 @@
         "shoes": {
           "id": "shoes",
           "name": "Shoes",
-          "imageUrl": "https://source.unsplash.com/200x200/?female,shoes",
+          "imageUrl": "https://source.unsplash.com/300x300/?female,shoes",
           "products": [
             {
               "name": "Adidas NMD",
@@ -250,7 +250,7 @@
         "shirts": {
           "id": "shirts",
           "name": "Shirts",
-          "imageUrl": "https://source.unsplash.com/200x200/?female,shirt",
+          "imageUrl": "https://source.unsplash.com/300x300/?female,shirt",
           "products": [
             {
               "name": "Black Jean Shearling",

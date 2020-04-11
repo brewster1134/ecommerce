@@ -7,11 +7,12 @@ import CategoryComponent from '../components/category.component.jsx'
 const HomePage = (props) => (
   <div className='page-home'>
     {Object.entries(props.data.categories).map(([key, category]) => (
-      <div key={key}>
+      <div className='category' key={key}>
         <Link className='category__cta' to={category.id}>
           <img src={category.imageUrl} alt={category.name} />
-          <h2>{category.name}</h2>
+          <h2 className='category__cta-name'>{category.name}</h2>
         </Link>
+
         <CategoryComponent category={category} />
       </div>
     ))}

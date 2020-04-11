@@ -1,13 +1,34 @@
 .component-category
-  display: grid
-  grid-template-columns: 1fr 1fr 1fr 1fr
+  grid-template-columns: 1fr 1fr 1fr
   text-align: center
-  a
-    border-width: 0 0 0.1em 0
+  display: grid
+  justify-content: space-between
+
+  a.component-category__cta
+    border-width: 0 0.1em 0.1em 0
+    border-color: lightgrey
+    display: inline-block
     border-style: solid
-    border-color: grey
-    margin: 1em
-    img
-      width: 200px
-      height: 200px
-      object-fit: cover
+    position: relative
+    margin: 0.6em
+    padding: 0.2em
+
+    .component-category__name
+      margin: 0.2em
+
+  &.has-image
+    a.component-category__cta
+      border: 0.1em solid lightgrey
+      display: inherit
+      margin: 0.6em auto
+
+      .component-category__name
+        transform: translate(-50%, -50%)
+        border: 0.1em solid lightgrey
+        background-color: white
+        padding: 0.1em 0.3em
+        position: absolute
+        opacity: 0.8
+        margin: 0
+        left: 50%
+        top: 50%

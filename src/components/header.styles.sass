@@ -1,20 +1,26 @@
 .component-header
-    display: grid
-    align-items: center
-    grid-template-columns: auto auto
     border-bottom: 0.1em solid grey
+    justify-content: space-between
+    align-items: center
+    display: flex
+
     .component-header__home
-      display: grid
       align-items: center
-      grid-template-columns: 100px auto
+      display: flex
+
       svg
+        margin-left: -20px
         width: 100px
+
       h1
         margin: 0
+
     .component-header__links
       text-align: right
+
       a
         margin-left: 1em
+
         h2
           display: inline-block
           margin: 0

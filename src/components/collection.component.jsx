@@ -15,10 +15,12 @@ const CollectionComponent = (props) => (
       >
         <h2>{props.categoryName}</h2>
       </Link>
+
       <h2 className='component-collection__collection-name'>
         {props.collection.name}
       </h2>
     </div>
+
     <div className='component-collection__products'>
       {props.collection.products.map((product, i) => {
         return (
@@ -30,6 +32,7 @@ const CollectionComponent = (props) => (
             <h4 className='component-collection__product-name'>
               {product.name}
             </h4>
+
             <img alt={product.name} src={product.imageUrl} />
             <div className='component-collection__price'>${product.price}</div>
           </div>
