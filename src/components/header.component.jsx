@@ -2,10 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import './header.styles.sass'
+import { ReactComponent as Logo } from '../assets/logo.svg'
 
 const HeaderComponent = () => (
   <div className='component-header'>
-    <Link to='/' key='home'>
+    <Link className='component-header__home' to='/' key='home'>
+      <Logo />
       <h1>Home</h1>
     </Link>
     <div className='component-header__links'>
