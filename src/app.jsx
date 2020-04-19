@@ -6,6 +6,7 @@ import CategoryPage from './pages/category.page.jsx'
 import CollectionPage from './pages/collection.page.jsx'
 import HeaderComponent from './components/header.component.jsx'
 import HomePage from './pages/home.page.jsx'
+import LoginPage from './pages/login.page.jsx'
 import StoreData from './pages/store.data.json'
 
 const App = () => (
@@ -14,6 +15,7 @@ const App = () => (
 
     <Switch>
       <Route exact path='/' component={() => <HomePage data={StoreData} />} />
+      <Route exact path='/login' component={LoginPage} />
 
       <Route
         exact

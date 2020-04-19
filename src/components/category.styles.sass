@@ -10,8 +10,15 @@
     display: inline-block
     border-style: solid
     position: relative
-    margin: 0.6em
     padding: 0.2em
+    margin: 0.6em
+
+    &:hover
+      img
+        opacity: 1
+
+    img
+      opacity: 0.5
 
     .component-category__name
       margin: 0.2em
@@ -19,8 +26,8 @@
   &.has-image
     a.component-category__cta
       border: 0.1em solid lightgrey
-      display: inherit
       margin: 0.6em auto
+      display: inherit
 
       .component-category__name
         transform: translate(-50%, -50%)
