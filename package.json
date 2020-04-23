@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5",
     "@testing-library/react": "^10",
     "@testing-library/user-event": "^10",
+    "firebase": "^7.14.1",
     "react": "^16",
     "react-dom": "^16",
     "react-router-dom": "^5",

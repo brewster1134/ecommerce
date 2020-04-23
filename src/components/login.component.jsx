@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { signInWithGoogle } from '../utils/firebase.js'
+
 class LoginComponent extends React.Component {
   constructor(props) {
     super(props)
@@ -44,7 +46,9 @@ class LoginComponent extends React.Component {
             required
           />
 
-          <button type='submit'>Login</button>
+          <button type='submit'>Login w/ E-mail & Password</button>
+          <hr />
+          <button onClick={signInWithGoogle}>Login w/ Google</button>
         </form>
       </div>
     )
