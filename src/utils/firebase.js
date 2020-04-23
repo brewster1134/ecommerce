@@ -19,6 +19,30 @@ firebase.initializeApp(config)
 const providerGoogle = new firebase.auth.GoogleAuthProvider()
 providerGoogle.setCustomParameters({ prompt: 'select_account' })
 
+// save user to database
+export const createUserDoc = async (userAuth, additionalData) => {
+  if (!userAuth) return false
+
+  const { displayName, email } = userAuth
+  const userDoc = firestore.collection('users').doc(userAuth.uid)
+
+  try {
+    await userDoc.set(
+      {
+        name: displayName,
+        email: email,
+        created: firebase.firestore.Timestamp.now(),
+        ...additionalData,
+      },
+      {
+        merge: true,
+      }
+    )
+  } catch (error) {
+    console.error(error.message)
+  }
+}
+
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
 export const signInWithGoogle = () => auth.signInWithPopup(providerGoogle)

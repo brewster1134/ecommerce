@@ -8,7 +8,7 @@ import HeaderComponent from './components/header.component.jsx'
 import HomePage from './pages/home.page.jsx'
 import LoginPage from './pages/login.page.jsx'
 import StoreData from './pages/store.data.json'
-import { auth } from './utils/firebase.js'
+import { auth, createUserDoc } from './utils/firebase.js'
 
 class App extends React.Component {
   authUnsubscribe = null // placeholder for firebase unsubscribe method
@@ -17,8 +17,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.authUnsubscribe = auth.onAuthStateChanged((user) => {
+    this.authUnsubscribe = auth.onAuthStateChanged(async (user) => {
       this.setState({ currentUser: user })
+      await createUserDoc(user)
     })
   }
 
