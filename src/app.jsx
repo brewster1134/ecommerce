@@ -8,28 +8,52 @@ import HeaderComponent from './components/header.component.jsx'
 import HomePage from './pages/home.page.jsx'
 import LoginPage from './pages/login.page.jsx'
 import StoreData from './pages/store.data.json'
+import { auth } from './utils/firebase.js'
 
-const App = () => (
-  <div className='ecommerce'>
-    <HeaderComponent />
+class App extends React.Component {
+  authUnsubscribe = null // placeholder for firebase unsubscribe method
+  state = {
+    currentUser: null,
+  }
 
-    <Switch>
-      <Route exact path='/' component={() => <HomePage data={StoreData} />} />
-      <Route exact path='/login' component={LoginPage} />
+  componentDidMount() {
+    this.authUnsubscribe = auth.onAuthStateChanged((user) => {
+      this.setState({ currentUser: user })
+    })
+  }
 
-      <Route
-        exact
-        path={`/:category`}
-        component={() => <CategoryPage data={StoreData} />}
-      />
+  componentWillUnmount() {
+    this.authUnsubscribe()
+  }
 
-      <Route
-        exact
-        path={`/:category/:collection`}
-        component={() => <CollectionPage data={StoreData} />}
-      />
-    </Switch>
-  </div>
-)
+  render() {
+    return (
+      <div className='ecommerce'>
+        <HeaderComponent currentUser={this.state.currentUser} />
+
+        <Switch>
+          <Route
+            exact
+            path='/'
+            component={() => <HomePage data={StoreData} />}
+          />
+          <Route exact path='/login' component={LoginPage} />
+
+          <Route
+            exact
+            path={`/:category`}
+            component={() => <CategoryPage data={StoreData} />}
+          />
+
+          <Route
+            exact
+            path={`/:category/:collection`}
+            component={() => <CollectionPage data={StoreData} />}
+          />
+        </Switch>
+      </div>
+    )
+  }
+}
 
 export default App

@@ -2,13 +2,19 @@ body
   font-family: sans-serif
   padding: 1em
   color: black
-  a
+
+  hr
+    padding: 0.05em
+    border-width: 0 0 0.2em 0
+    border-style: double
+    border-color: grey
+
+  a,
+  .anchor
     text-decoration: none
-    color: black
-    &:active,
-    &:visited
-      color: brown
+    color: brown
     &:hover
+      cursor: pointer
       color: grey
 
   form
@@ -20,5 +26,8 @@ body
     button
       background-color: black
       padding: 0.5em 1em
+      margin: 0.5em
       border: none
       color: white
+      &:hover
+        cursor: pointer
