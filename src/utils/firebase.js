@@ -25,18 +25,22 @@ export const createUserRef = async (userAuth, additionalData) => {
     return null
   }
 
-  const { displayName, email } = userAuth
   const userRef = firestore.collection('users').doc(userAuth.uid)
+  const snapshot = await userRef.get()
 
-  try {
-    await userRef.set({
-      displayName,
-      email,
-      created: firebase.firestore.Timestamp.now(),
-      ...additionalData,
-    })
-  } catch (error) {
-    console.error(error.message)
+  if (!snapshot.exists) {
+    const { displayName, email } = userAuth
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        created: firebase.firestore.Timestamp.now(),
+        ...additionalData,
+      })
+    } catch (error) {
+      console.error(error.message)
+    }
   }
 
   return userRef

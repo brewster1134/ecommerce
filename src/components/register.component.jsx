@@ -26,16 +26,16 @@ class RegisterComponent extends React.Component {
 
     try {
       // create authenticated user
-      const userCred = await auth.createUserWithEmailAndPassword(
+      const { user } = await auth.createUserWithEmailAndPassword(
         email,
         password
       )
 
       // save user to db
-      await createUserRef(userCred.user, { displayName })
+      createUserRef(user, { displayName })
 
       // update state of current user
-      this.setState({ currentUser: userCred.user })
+      this.setState({ currentUser: user })
     } catch (error) {
       alert(error.message)
     }
