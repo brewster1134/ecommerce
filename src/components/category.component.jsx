@@ -5,13 +5,13 @@ import './category.styles.sass'
 
 const CategoryComponent = (props) => (
   <div
-    className={`component-category ${!!props.showImage ? 'has-image' : ''}`}
+    className={`category-component ${!!props.showImage ? 'has-image' : ''}`}
     id={`category_${props.category.id}`}
   >
     {Object.entries(props.category.collections).map(([key, collection]) => {
       return (
         <Link
-          className='component-category__cta'
+          className='category-component__cta'
           to={`${props.category.id}/${collection.id}`}
           key={collection.id}
         >
@@ -19,7 +19,7 @@ const CategoryComponent = (props) => (
             <img src={collection.imageUrl} alt={collection.name} />
           ) : null}
 
-          <h3 className='component-category__name'>{collection.name}</h3>
+          <h3 className='category-component__name'>{collection.name}</h3>
         </Link>
       )
     })}

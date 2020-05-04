@@ -2,24 +2,38 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import './app.sass'
+import { auth, createUserRef } from './utils/firebase.js'
 import CategoryPage from './pages/category.page.jsx'
 import CollectionPage from './pages/collection.page.jsx'
 import HeaderComponent from './components/header.component.jsx'
 import HomePage from './pages/home.page.jsx'
 import LoginPage from './pages/login.page.jsx'
 import StoreData from './pages/store.data.json'
-import { auth, createUserDoc } from './utils/firebase.js'
 
 class App extends React.Component {
-  authUnsubscribe = null // placeholder for firebase unsubscribe method
+  authUnsubscribe = null
   state = {
     currentUser: null,
   }
 
   componentDidMount() {
-    this.authUnsubscribe = auth.onAuthStateChanged(async (user) => {
-      this.setState({ currentUser: user })
-      await createUserDoc(user)
+    this.authUnsubscribe = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserRef(userAuth)
+
+        userRef.onSnapshot((snapshot) => {
+          this.setState({
+            currentUser: {
+              id: snapshot.id,
+              ...snapshot.data(),
+            },
+          })
+        })
+      } else {
+        this.setState({
+          currentUser: null,
+        })
+      }
     })
   }
 

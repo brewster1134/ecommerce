@@ -1,20 +1,11 @@
 import React from 'react'
 
-import { signInWithGoogle } from '../utils/firebase.js'
+import { auth, signInWithGoogle } from '../utils/firebase.js'
 
 class LoginComponent extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      email: '',
-      password: '',
-    }
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault()
-    this.setState({ email: '', password: '' })
+  state = {
+    email: '',
+    password: '',
   }
 
   handleChange = (e) => {
@@ -22,16 +13,29 @@ class LoginComponent extends React.Component {
     this.setState({ [name]: value })
   }
 
+  handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const { email, password } = this.state
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password)
+      this.setState({ email: '', password: '' })
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
   render() {
     return (
-      <div className='component-login'>
-        <h2>I already have an account...</h2>
+      <div className='login-component'>
+        <h2>Login...</h2>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='email'>E-mail</label>
           <input
             name='email'
             onChange={this.handleChange}
-            placeholder='e-mail'
+            type='email'
             value={this.state.email}
             required
           />
@@ -40,13 +44,12 @@ class LoginComponent extends React.Component {
           <input
             name='password'
             onChange={this.handleChange}
-            placeholder='password'
             type='password'
             value={this.state.password}
             required
           />
 
-          <button type='submit'>Login w/ E-mail & Password</button>
+          <button type='submit'>Login w/ Email</button>
           <hr />
           <button onClick={signInWithGoogle}>Login w/ Google</button>
         </form>

@@ -12,8 +12,8 @@ class HeaderComponent extends React.Component {
 
   render() {
     return (
-      <div className='component-header'>
-        <Link className='component-header__home' to='/' key='home'>
+      <div className='header-component'>
+        <Link className='header-component__home' to='/' key='home'>
           <Logo />
           <h1>Home</h1>
         </Link>
@@ -26,7 +26,7 @@ class HeaderComponent extends React.Component {
           <h2>Womens</h2>
         </Link>
 
-        <div className='component-header__links'>
+        <div className='header-component__links'>
           {this.props.currentUser ? (
             <div>
               <span>{this.props.currentUser.displayName}</span>

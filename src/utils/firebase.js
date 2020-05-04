@@ -20,27 +20,26 @@ const providerGoogle = new firebase.auth.GoogleAuthProvider()
 providerGoogle.setCustomParameters({ prompt: 'select_account' })
 
 // save user to database
-export const createUserDoc = async (userAuth, additionalData) => {
-  if (!userAuth) return false
+export const createUserRef = async (userAuth, additionalData) => {
+  if (!userAuth) {
+    return null
+  }
 
   const { displayName, email } = userAuth
-  const userDoc = firestore.collection('users').doc(userAuth.uid)
+  const userRef = firestore.collection('users').doc(userAuth.uid)
 
   try {
-    await userDoc.set(
-      {
-        name: displayName,
-        email: email,
-        created: firebase.firestore.Timestamp.now(),
-        ...additionalData,
-      },
-      {
-        merge: true,
-      }
-    )
+    await userRef.set({
+      displayName,
+      email,
+      created: firebase.firestore.Timestamp.now(),
+      ...additionalData,
+    })
   } catch (error) {
     console.error(error.message)
   }
+
+  return userRef
 }
 
 export const auth = firebase.auth()
