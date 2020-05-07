@@ -1,12 +1,12 @@
 import React from 'react'
-import { auth, createUserRef } from '../utils/firebase.js'
+import { auth, createUserRef } from '../utils/firebase'
 
 class RegisterComponent extends React.Component {
   state = {
     displayName: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    confirmPassword: ''
   }
 
   handleChange = (e) => {
@@ -45,7 +45,7 @@ class RegisterComponent extends React.Component {
       displayName: '',
       email: '',
       password: '',
-      confirmPassword: '',
+      confirmPassword: ''
     })
   }
 

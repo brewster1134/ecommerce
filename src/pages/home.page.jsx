@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import './home.styles.sass'
-import CategoryComponent from '../components/category.component.jsx'
+import CategoryComponent from '../components/category.component'
 
 const HomePage = (props) => (
   <div className='page-home'>

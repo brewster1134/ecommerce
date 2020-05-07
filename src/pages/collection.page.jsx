@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-import CollectionComponent from '../components/collection.component.jsx'
+import CollectionComponent from '../components/collection.component'
 
 const CollectionPage = (props) => {
   const category = props.data.categories[props.match.params.category]

@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-import CategoryComponent from '../components/category.component.jsx'
+import CategoryComponent from '../components/category.component'
 import './category.styles.sass'
 
 const CategoryPage = (props) => {

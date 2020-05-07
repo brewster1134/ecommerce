@@ -10,7 +10,7 @@ const config = {
   storageBucket: 'react-ecommerce-firebase.appspot.com',
   messagingSenderId: '488577895067',
   appId: '1:488577895067:web:296cbf424945a67994943e',
-  measurementId: 'G-FSQHQJ1V8Y',
+  measurementId: 'G-FSQHQJ1V8Y'
 }
 
 firebase.initializeApp(config)
@@ -36,7 +36,7 @@ export const createUserRef = async (userAuth, additionalData) => {
         displayName,
         email,
         created: firebase.firestore.Timestamp.now(),
-        ...additionalData,
+        ...additionalData
       })
     } catch (error) {
       console.error(error.message)

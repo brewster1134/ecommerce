@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { auth, signInWithGoogle } from '../utils/firebase.js'
+import { auth, signInWithGoogle } from '../utils/firebase'
 
 class LoginComponent extends React.Component {
   state = {
     email: '',
-    password: '',
+    password: ''
   }
 
   handleChange = (e) => {
