@@ -6,11 +6,14 @@
     "@testing-library/jest-dom": "^5",
     "@testing-library/react": "^10",
     "@testing-library/user-event": "^10",
-    "firebase": "^7.14.1",
+    "firebase": "^7",
     "react": "^16",
     "react-dom": "^16",
+    "react-redux": "^7",
     "react-router-dom": "^5",
-    "react-scripts": "^3"
+    "react-scripts": "^3",
+    "redux": "^4",
+    "redux-logger": "^3"
   },
   "scripts": {
     "start": "react-scripts start",

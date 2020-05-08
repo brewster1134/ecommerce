@@ -1,48 +1,45 @@
-import React from 'react'
+import { auth } from '../utils/firebase'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { auth } from '../utils/firebase.js'
+import React from 'react'
 
 import './header.styles.sass'
 import { ReactComponent as Logo } from '../assets/logo.svg'
 
-class HeaderComponent extends React.Component {
-  handleClick() {
-    auth.signOut()
-  }
+const HeaderComponent = ({ currentUser }) => (
+  <div className='header-component'>
+    <Link className='header-component__home' to='/' key='home'>
+      <Logo />
+      <h1>Home</h1>
+    </Link>
 
-  render() {
-    return (
-      <div className='header-component'>
-        <Link className='header-component__home' to='/' key='home'>
-          <Logo />
-          <h1>Home</h1>
-        </Link>
+    <Link to='/mens' key='mens'>
+      <h2>Mens</h2>
+    </Link>
 
-        <Link to='/mens' key='mens'>
-          <h2>Mens</h2>
-        </Link>
+    <Link to='/womens' key='womens'>
+      <h2>Womens</h2>
+    </Link>
 
-        <Link to='/womens' key='womens'>
-          <h2>Womens</h2>
-        </Link>
-
-        <div className='header-component__links'>
-          {this.props.currentUser ? (
-            <div>
-              <span>{this.props.currentUser.displayName}</span>
-              <div className='anchor' onClick={this.handleClick}>
-                Logout
-              </div>
-            </div>
-          ) : (
-            <Link to='/login' key='login'>
-              Login
-            </Link>
-          )}
+    <div className='header-component__links'>
+      {currentUser ? (
+        <div>
+          <span>{currentUser.displayName}</span>
+          <div className='anchor' onClick={() => auth.signOut()}>
+            Logout
+          </div>
         </div>
-      </div>
-    )
-  }
-}
+      ) : (
+        <Link to='/login' key='login'>
+          Login
+        </Link>
+      )}
+    </div>
+  </div>
+)
 
-export default HeaderComponent
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser
+})
+
+export default connect(mapStateToProps)(HeaderComponent)
