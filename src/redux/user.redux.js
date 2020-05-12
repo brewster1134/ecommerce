@@ -1,4 +1,4 @@
-import { actionTypes } from './root.redux'
+import actionTypes from './action-types'
 
 const INITIAL_STATE = {
   currentUser: null

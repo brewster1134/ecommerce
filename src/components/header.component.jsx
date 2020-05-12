@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 
 import './header.styles.sass'
-import { ReactComponent as Logo } from '../assets/logo.svg'
+import { ReactComponent as LogoIcon } from '../assets/logo.svg'
+import CartIconComponent from './cart-icon.component'
 
 const HeaderComponent = ({ currentUser }) => (
   <div className='header-component'>
     <Link className='header-component__home' to='/' key='home'>
-      <Logo />
+      <LogoIcon />
       <h1>Home</h1>
     </Link>
 
@@ -34,6 +35,7 @@ const HeaderComponent = ({ currentUser }) => (
           Login
         </Link>
       )}
+      <CartIconComponent />
     </div>
   </div>
 )
