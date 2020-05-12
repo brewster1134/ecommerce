@@ -1,5 +1,5 @@
 import React from 'react'
-import { auth, createUserRef } from '../utils/firebase'
+import { auth, userCreateRef } from '../utils/firebase'
 
 class RegisterComponent extends React.Component {
   state = {
@@ -32,7 +32,7 @@ class RegisterComponent extends React.Component {
       )
 
       // save user to db
-      createUserRef(user, { displayName })
+      userCreateRef(user, { displayName })
 
       // update state of current user
       this.setState({ currentUser: user })

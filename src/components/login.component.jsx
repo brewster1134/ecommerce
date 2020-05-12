@@ -31,6 +31,8 @@ class LoginComponent extends React.Component {
     return (
       <div className='login-component'>
         <h2>Login...</h2>
+
+        {/* remail/password form */}
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='email'>E-mail</label>
           <input
@@ -51,7 +53,12 @@ class LoginComponent extends React.Component {
           />
 
           <button type='submit'>Login w/ Email</button>
+
           <hr />
+
+          {/* google auth form */}
+        </form>
+        <form>
           <button onClick={signInWithGoogle}>Login w/ Google</button>
         </form>
       </div>

@@ -20,7 +20,7 @@ const providerGoogle = new firebase.auth.GoogleAuthProvider()
 providerGoogle.setCustomParameters({ prompt: 'select_account' })
 
 // save user to database
-export const createUserRef = async (userAuth, additionalData) => {
+export const userCreateRef = async (userAuth, additionalData) => {
   if (!userAuth) {
     return null
   }
