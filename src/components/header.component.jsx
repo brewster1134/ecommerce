@@ -5,7 +5,6 @@ import React from 'react'
 
 import './header.styles.sass'
 import { ReactComponent as LogoIcon } from '../assets/logo.svg'
-import CartIconComponent from './cart-icon.component'
 
 const HeaderComponent = ({ currentUser }) => (
   <div className='header-component'>
@@ -35,7 +34,6 @@ const HeaderComponent = ({ currentUser }) => (
           Login
         </Link>
       )}
-      <CartIconComponent />
     </div>
   </div>
 )
