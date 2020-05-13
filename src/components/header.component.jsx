@@ -7,7 +7,7 @@ import './header.styles.sass'
 import { ReactComponent as LogoIcon } from '../assets/logo.svg'
 import { ReactComponent as ShoppingBagIcon } from '../assets/bag.svg'
 import { toggleDropdown } from '../redux/cart.redux'
-import CartItemsComponent from './cart-items.component'
+import CartProductsComponent from './cart-products.component'
 
 const HeaderComponent = ({ currentUser, dropdownVisible, toggleDropdown }) => {
   return (
@@ -33,7 +33,7 @@ const HeaderComponent = ({ currentUser, dropdownVisible, toggleDropdown }) => {
           </div>
           {dropdownVisible ? (
             <div className='dropdown'>
-              <CartItemsComponent />
+              <CartProductsComponent />
               <button>Checkout</button>
             </div>
           ) : null}

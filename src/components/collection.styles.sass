@@ -15,35 +15,36 @@
     display: grid
 
     .collection-component__product
-      border: 0.1em solid lightgrey
       position: relative
-      margin: 0.6em auto
+      margin: 0.6em 1em
       display: inherit
       padding: 0.2em
 
-      .collection-component__product-name
-        border: 0.1em solid lightgrey
-        transform: translate(-50%)
-        background-color: white
-        padding: 0.1em 0.3em
-        position: absolute
-        opacity: 0.8
-        margin: 0
-        left: 50%
-        top: 1em
+      &:hover
+        button
+          display: block
 
       img
+        border: 1px solid lightgrey
         object-fit: cover
         height: 300px
         width: 300px
 
-      .collection-component__price
-        border: 0.1em solid lightgrey
-        transform: translate(-50%)
-        background-color: white
-        padding: 0.1em 0.3em
+      .collection-component__meta-data
+        justify-content: space-between
+        font-weight: lighter
+        padding: 0.2em 0
+        display: flex
+        color: grey
+
+      button
+        background-color: rgba(255,255,255, 0.8)
+        transform: translate(-50%, 0)
+        border: 1px solid grey
+        font-weight: lighter
         position: absolute
-        opacity: 0.8
+        bottom: 2em
+        color: grey
+        width: 95%
         margin: 0
         left: 50%
-        bottom: 1em
