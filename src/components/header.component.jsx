@@ -5,6 +5,7 @@ import React from 'react'
 
 import './header.styles.sass'
 import { ReactComponent as LogoIcon } from '../assets/logo.svg'
+import CartIconComponent from './cart-icon.component'
 
 const HeaderComponent = ({ currentUser }) => (
   <div className='header-component'>
@@ -22,18 +23,21 @@ const HeaderComponent = ({ currentUser }) => (
     </Link>
 
     <div className='header-component__links'>
-      {currentUser ? (
-        <div>
-          <span>{currentUser.displayName}</span>
-          <div className='anchor' onClick={() => auth.signOut()}>
-            Logout
+      <CartIconComponent />
+      <div className='auth'>
+        {currentUser ? (
+          <div>
+            <div className='anchor' onClick={() => auth.signOut()}>
+              Logout
+            </div>
+            <span>{currentUser.displayName}</span>
           </div>
-        </div>
-      ) : (
-        <Link to='/login' key='login'>
-          Login
-        </Link>
-      )}
+        ) : (
+          <Link to='/login' key='login'>
+            Login
+          </Link>
+        )}
+      </div>
     </div>
   </div>
 )
