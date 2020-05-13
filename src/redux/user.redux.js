@@ -4,7 +4,8 @@ const INITIAL_STATE = {
   currentUser: null
 }
 
-// reducer
+// REDUCER
+//
 export const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.user.SET_CURRENT_USER:
@@ -18,7 +19,8 @@ export const userReducer = (state = INITIAL_STATE, action) => {
   }
 }
 
-// actions
+// ACTIONS
+//
 export const userSetCurrent = (user) => ({
   type: actionTypes.user.SET_CURRENT_USER,
   payload: user

@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   products: []
 }
 
-// reducer
+// REDUCER
+//
 export const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.cart.TOGGLE_DROPDOWN:
@@ -16,7 +17,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
     case actionTypes.cart.ADD_PRODUCT:
       return {
         ...state,
-        products: [...state.products, action.payload]
+        products: addProductQuantity(state.products, action.payload)
       }
 
     default:
@@ -24,7 +25,8 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
   }
 }
 
-// actions
+// ACTIONS
+//
 export const toggleDropdown = (cart) => ({
   type: actionTypes.cart.TOGGLE_DROPDOWN,
   payload: cart
@@ -34,3 +36,24 @@ export const addProduct = (product) => ({
   type: actionTypes.cart.ADD_PRODUCT,
   payload: product
 })
+
+// UTILITIES
+//
+const addProductQuantity = (existingProducts, newProduct) => {
+  // check if product has already been added to the cart
+  const existingProduct = existingProducts.find(
+    (product) => product.id === newProduct.id
+  )
+
+  // if product already exists, increase the quantity
+  if (existingProduct) {
+    return existingProducts.map((product) =>
+      product.id === newProduct.id
+        ? { ...product, quantity: product.quantity + 1 }
+        : product
+    )
+  }
+
+  // if product does not exist, set the quantity to 1
+  return [...existingProducts, { ...newProduct, quantity: 1 }]
+}
