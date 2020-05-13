@@ -10,7 +10,7 @@ import CollectionPage from './pages/collection.page'
 import HeaderComponent from './components/header.component'
 import HomePage from './pages/home.page'
 import LoginPage from './pages/login.page'
-import StoreData from './pages/store.data.json'
+import StoreData from './assets/store.data.json'
 
 class App extends React.Component {
   authUnsubscribe = null
