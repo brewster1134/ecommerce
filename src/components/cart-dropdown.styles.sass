@@ -1,0 +1,32 @@
+.cart-dropdown-component
+  background: white
+  border: 0.2em solid grey
+  max-height: 80vh
+  min-width: 25vw
+  overflow-y: scroll
+  padding: 1em
+  position: absolute
+  right: 0
+  white-space: nowrap
+  z-index: 1
+
+  .cart-dropdown-component__product
+    align-items: center
+    display: flex
+    font-size: 0.9em
+    justify-content: flex-end
+    margin: 0 0 0.5em 0
+
+    img
+      display: inline-block
+      height: 50px
+      margin-left: 0.5em
+      object-fit: cover
+      width: 50px
+
+  button
+    margin: 0
+    width: 100%
+
+  .cart-dropdown-component__empty
+    text-align: center

@@ -14,7 +14,7 @@ import {
   toggleDropdown
 } from '../state/cart.state'
 import { selectCurrentUser } from '../state/user.state'
-import CartProductsComponent from './cart-products.component'
+import CartDropdownComponent from './cart-dropdown.component'
 
 const HeaderComponent = ({
   cartQuantity,
@@ -39,26 +39,13 @@ const HeaderComponent = ({
 
       <div className='header-component__links'>
         <div className='header-component__cart'>
-          <div className='header-component__icon' onClick={toggleDropdown}>
+          <div className='header-component__cart-icon' onClick={toggleDropdown}>
             <ShoppingBagIcon />
             <div className='header-component__cart-quantity'>
               {cartQuantity}
             </div>
           </div>
-          {dropdownVisible ? (
-            <div className='header-component__dropdown'>
-              {products.length ? (
-                <div>
-                  <CartProductsComponent />
-                  <button>Checkout</button>
-                </div>
-              ) : (
-                <div className='header-component__cart-empty'>
-                  Your Cart is Empty
-                </div>
-              )}
-            </div>
-          ) : null}
+          {dropdownVisible ? <CartDropdownComponent /> : null}
         </div>
         <div className='header-component__auth'>
           {currentUser ? (
