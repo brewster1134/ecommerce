@@ -10,6 +10,7 @@ import { ReactComponent as ShoppingBagIcon } from '../assets/bag.svg'
 import {
   selectCartQuantity,
   selectDropdownVisible,
+  selectProducts,
   toggleDropdown
 } from '../state/cart.state'
 import { selectCurrentUser } from '../state/user.state'
@@ -19,6 +20,7 @@ const HeaderComponent = ({
   cartQuantity,
   currentUser,
   dropdownVisible,
+  products,
   toggleDropdown
 }) => {
   return (
@@ -45,8 +47,16 @@ const HeaderComponent = ({
           </div>
           {dropdownVisible ? (
             <div className='header-component__dropdown'>
-              <CartProductsComponent />
-              <button>Checkout</button>
+              {products.length ? (
+                <div>
+                  <CartProductsComponent />
+                  <button>Checkout</button>
+                </div>
+              ) : (
+                <div className='header-component__cart-empty'>
+                  Your Cart is Empty
+                </div>
+              )}
             </div>
           ) : null}
         </div>
@@ -72,7 +82,8 @@ const HeaderComponent = ({
 const mapStateToProps = createStructuredSelector({
   cartQuantity: selectCartQuantity,
   currentUser: selectCurrentUser,
-  dropdownVisible: selectDropdownVisible
+  dropdownVisible: selectDropdownVisible,
+  products: selectProducts
 })
 
 const mapDispatchToProps = (dispatch) => ({
