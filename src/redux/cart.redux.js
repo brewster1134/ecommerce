@@ -41,7 +41,13 @@ export const addProduct = (product) => ({
 
 // SELECTORS
 //
-const selectProducts = (state) => state.cart.products
+const selectCart = (state) => state.cart
+
+export const selectProducts = createSelector(
+  selectCart,
+  (cart) => cart.products
+)
+
 export const selectCartQuantity = createSelector(selectProducts, (products) =>
   products.reduce(
     (totalQuantity, product) => totalQuantity + product.quantity,
