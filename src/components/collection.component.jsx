@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 import React from 'react'
 
 import './collection.styles.sass'
-import { addProduct } from '../redux/cart.redux'
+import { addProduct } from '../state/cart.state'
 
 const CollectionComponent = (props) => {
   return (

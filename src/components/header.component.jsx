@@ -1,12 +1,18 @@
 import { auth } from '../utils/firebase'
 import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import { Link } from 'react-router-dom'
 import React from 'react'
 
 import './header.styles.sass'
 import { ReactComponent as LogoIcon } from '../assets/logo.svg'
 import { ReactComponent as ShoppingBagIcon } from '../assets/bag.svg'
-import { selectCartQuantity, toggleDropdown } from '../redux/cart.redux'
+import {
+  selectCartQuantity,
+  selectDropdownVisible,
+  toggleDropdown
+} from '../state/cart.state'
+import { selectCurrentUser } from '../state/user.state'
 import CartProductsComponent from './cart-products.component'
 
 const HeaderComponent = ({
@@ -63,10 +69,10 @@ const HeaderComponent = ({
   )
 }
 
-const mapStateToProps = (state) => ({
-  cartQuantity: selectCartQuantity(state),
-  currentUser: state.user.currentUser,
-  dropdownVisible: state.cart.dropdownVisible
+const mapStateToProps = createStructuredSelector({
+  cartQuantity: selectCartQuantity,
+  currentUser: selectCurrentUser,
+  dropdownVisible: selectDropdownVisible
 })
 
 const mapDispatchToProps = (dispatch) => ({

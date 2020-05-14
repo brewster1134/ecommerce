@@ -1,8 +1,17 @@
+import { createSelector } from 'reselect'
+
 import actionTypes from './action-types'
 
 const INITIAL_STATE = {
   currentUser: null
 }
+
+// ACTIONS
+//
+export const userSetCurrent = (user) => ({
+  type: actionTypes.user.SET_CURRENT_USER,
+  payload: user
+})
 
 // REDUCER
 //
@@ -19,9 +28,11 @@ export const userReducer = (state = INITIAL_STATE, action) => {
   }
 }
 
-// ACTIONS
+// SELECTORS
 //
-export const userSetCurrent = (user) => ({
-  type: actionTypes.user.SET_CURRENT_USER,
-  payload: user
-})
+const selectUser = (state) => state.user
+
+export const selectCurrentUser = createSelector(
+  selectUser,
+  (user) => user.currentUser
+)

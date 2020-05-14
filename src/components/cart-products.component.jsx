@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import React from 'react'
 
-import { selectProducts } from '../redux/cart.redux'
+import { selectProducts } from '../state/cart.state'
 import CartProductComponent from './cart-product.component'
 
 const CartProductsComponent = ({ products }) => {
@@ -16,8 +17,8 @@ const CartProductsComponent = ({ products }) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  products: selectProducts(state)
+const mapStateToProps = createStructuredSelector({
+  products: selectProducts
 })
 
 export default connect(mapStateToProps)(CartProductsComponent)

@@ -7,6 +7,18 @@ const INITIAL_STATE = {
   products: []
 }
 
+// ACTIONS
+//
+export const toggleDropdown = (cart) => ({
+  type: actionTypes.cart.TOGGLE_DROPDOWN,
+  payload: cart
+})
+
+export const addProduct = (product) => ({
+  type: actionTypes.cart.ADD_PRODUCT,
+  payload: product
+})
+
 // REDUCER
 //
 export const cartReducer = (state = INITIAL_STATE, action) => {
@@ -27,18 +39,6 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
   }
 }
 
-// ACTIONS
-//
-export const toggleDropdown = (cart) => ({
-  type: actionTypes.cart.TOGGLE_DROPDOWN,
-  payload: cart
-})
-
-export const addProduct = (product) => ({
-  type: actionTypes.cart.ADD_PRODUCT,
-  payload: product
-})
-
 // SELECTORS
 //
 const selectCart = (state) => state.cart
@@ -53,6 +53,11 @@ export const selectCartQuantity = createSelector(selectProducts, (products) =>
     (totalQuantity, product) => totalQuantity + product.quantity,
     0
   )
+)
+
+export const selectDropdownVisible = createSelector(
+  selectCart,
+  (cart) => cart.dropdownVisible
 )
 
 // UTILITIES
