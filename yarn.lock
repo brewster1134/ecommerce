@@ -5560,6 +5560,7 @@ __metadata:
     react-scripts: ^3
     redux: ^4
     redux-logger: ^3
+    reselect: ^4
   languageName: unknown
   linkType: soft
 
@@ -12814,6 +12815,13 @@ fsevents@~2.1.2:
   version: 1.0.0
   resolution: "requires-port@npm:1.0.0"
   checksum: 3/0db25fb2ac9b4f2345a350846b7ba99d1f25a6686b1728246d14f05450c8f2fc066bdfae4561b4be2627c184a030a27e17268cfefdf46836e271db13734bc49e
+  languageName: node
+  linkType: hard
+
+"reselect@npm:^4":
+  version: 4.0.0
+  resolution: "reselect@npm:4.0.0"
+  checksum: 3/3480930929f673f12962cdde140dce48ea8ba171cd428bb2c7639672e41770bd6b64e935bc0400f47cfa960f617c7ac068c4309527373825d11e27262f08c0a3
   languageName: node
   linkType: hard
 

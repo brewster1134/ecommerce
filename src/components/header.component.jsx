@@ -6,10 +6,15 @@ import React from 'react'
 import './header.styles.sass'
 import { ReactComponent as LogoIcon } from '../assets/logo.svg'
 import { ReactComponent as ShoppingBagIcon } from '../assets/bag.svg'
-import { toggleDropdown } from '../redux/cart.redux'
+import { selectCartQuantity, toggleDropdown } from '../redux/cart.redux'
 import CartProductsComponent from './cart-products.component'
 
-const HeaderComponent = ({ currentUser, dropdownVisible, toggleDropdown }) => {
+const HeaderComponent = ({
+  cartQuantity,
+  currentUser,
+  dropdownVisible,
+  toggleDropdown
+}) => {
   return (
     <div className='header-component'>
       <Link className='header-component__home' to='/' key='home'>
@@ -29,7 +34,7 @@ const HeaderComponent = ({ currentUser, dropdownVisible, toggleDropdown }) => {
         <div className='cart'>
           <div className='icon' onClick={toggleDropdown}>
             <ShoppingBagIcon />
-            <div className='cart-count'>0</div>
+            <div className='cart-quantity'>{cartQuantity}</div>
           </div>
           {dropdownVisible ? (
             <div className='dropdown'>
@@ -57,9 +62,10 @@ const HeaderComponent = ({ currentUser, dropdownVisible, toggleDropdown }) => {
   )
 }
 
-const mapStateToProps = ({ cart, user }) => ({
-  currentUser: user.currentUser,
-  dropdownVisible: cart.dropdownVisible
+const mapStateToProps = (state) => ({
+  cartQuantity: selectCartQuantity(state),
+  currentUser: state.user.currentUser,
+  dropdownVisible: state.cart.dropdownVisible
 })
 
 const mapDispatchToProps = (dispatch) => ({

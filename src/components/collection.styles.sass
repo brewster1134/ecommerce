@@ -10,15 +10,13 @@
       display: inline-block
 
   .collection-component__products
-    grid-template-columns: 1fr 1fr 1fr
-    text-align: center
-    display: grid
+    justify-content: center
+    flex-wrap: wrap
+    display: flex
 
     .collection-component__product
       position: relative
-      margin: 0.6em 1em
-      display: inherit
-      padding: 0.2em
+      margin: 0.6em
 
       &:hover
         button
@@ -33,7 +31,6 @@
       .collection-component__meta-data
         justify-content: space-between
         font-weight: lighter
-        padding: 0.2em 0
         display: flex
         color: grey
 
@@ -45,6 +42,6 @@
         position: absolute
         bottom: 2em
         color: grey
-        width: 95%
+        width: 94%
         margin: 0
         left: 50%

@@ -1,3 +1,5 @@
+import { createSelector } from 'reselect'
+
 import actionTypes from './action-types'
 
 const INITIAL_STATE = {
@@ -36,6 +38,16 @@ export const addProduct = (product) => ({
   type: actionTypes.cart.ADD_PRODUCT,
   payload: product
 })
+
+// SELECTORS
+//
+const selectProducts = (state) => state.cart.products
+export const selectCartQuantity = createSelector(selectProducts, (products) =>
+  products.reduce(
+    (totalQuantity, product) => totalQuantity + product.quantity,
+    0
+  )
+)
 
 // UTILITIES
 //
