@@ -19,7 +19,7 @@ const CategoryComponent = (props) => (
             <img src={collection.imageUrl} alt={collection.name} />
           ) : null}
 
-          <h3 className='category-component__name'>{collection.name}</h3>
+          <div>{collection.name}</div>
         </Link>
       )
     })}

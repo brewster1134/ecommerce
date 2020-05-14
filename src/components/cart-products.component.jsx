@@ -5,7 +5,7 @@ import CartProductComponent from './cart-product.component'
 
 const CartProductsComponent = ({ products }) => {
   return (
-    <ul className='cart-products-component'>
+    <ul>
       {products.map((product) => (
         <li>
           <CartProductComponent key={product.id} product={product} />

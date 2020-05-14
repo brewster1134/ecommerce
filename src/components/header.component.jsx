@@ -17,33 +17,34 @@ const HeaderComponent = ({
 }) => {
   return (
     <div className='header-component'>
-      <Link className='header-component__home' to='/' key='home'>
+      <Link to='/' key='home'>
         <LogoIcon />
-        <h1>Home</h1>
       </Link>
 
       <Link to='/mens' key='mens'>
-        <h2>Mens</h2>
+        <h3>Mens</h3>
       </Link>
 
       <Link to='/womens' key='womens'>
-        <h2>Womens</h2>
+        <h3>Womens</h3>
       </Link>
 
       <div className='header-component__links'>
-        <div className='cart'>
-          <div className='icon' onClick={toggleDropdown}>
+        <div className='header-component__cart'>
+          <div className='header-component__icon' onClick={toggleDropdown}>
             <ShoppingBagIcon />
-            <div className='cart-quantity'>{cartQuantity}</div>
+            <div className='header-component__cart-quantity'>
+              {cartQuantity}
+            </div>
           </div>
           {dropdownVisible ? (
-            <div className='dropdown'>
+            <div className='header-component__dropdown'>
               <CartProductsComponent />
               <button>Checkout</button>
             </div>
           ) : null}
         </div>
-        <div className='auth'>
+        <div className='header-component__auth'>
           {currentUser ? (
             <div>
               <div className='anchor' onClick={() => auth.signOut()}>

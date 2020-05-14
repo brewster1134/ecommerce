@@ -1,28 +1,10 @@
+@import '../utils/mixins.sass'
+
 .page-home
   text-align: center
 
-  .category
+  .page-home__category
     margin: 1em 0 2em 0
 
-    .category__cta
-      border: 0.1em solid lightgrey
-      position: relative
-      display: inherit
-      padding: 0.2em
-
-      img
-        opacity: 0.5
-
-      &:hover
-        img
-          opacity: 1
-
-      .category__cta-name
-        transform: translate(-50%, -50%)
-        border: 0.1em solid lightgrey
-        background-color: white
-        padding: 0.1em 0.3em
-        position: absolute
-        margin: 0
-        left: 50%
-        top: 50%
+    .page-home__category-cta
+      +image-cta

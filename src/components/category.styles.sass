@@ -1,41 +1,17 @@
+@import '../utils/mixins.sass'
+
 .category-component
-  grid-template-columns: 1fr 1fr 1fr
-  text-align: center
-  display: grid
-  justify-content: space-between
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
 
-  a.category-component__cta
-    border-width: 0 0.1em 0.1em 0
+  .category-component__cta
     border-color: lightgrey
-    display: inline-block
     border-style: solid
-    position: relative
-    padding: 0.2em
+    border-width: 0 0.1em 0.1em 0
     margin: 0.6em
-
-    &:hover
-      img
-        opacity: 1
-
-    img
-      opacity: 0.5
-
-    .category-component__name
-      margin: 0.2em
+    padding: 0.2em
 
   &.has-image
-    a.category-component__cta
-      border: 0.1em solid lightgrey
-      margin: 0.6em auto
-      display: inherit
-
-      .category-component__name
-        transform: translate(-50%, -50%)
-        border: 0.1em solid lightgrey
-        background-color: white
-        padding: 0.1em 0.3em
-        position: absolute
-        opacity: 0.8
-        margin: 0
-        left: 50%
-        top: 50%
+    .category-component__cta
+      +image-cta

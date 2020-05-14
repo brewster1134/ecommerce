@@ -35,12 +35,8 @@ const CollectionComponent = (props) => {
             >
               <img alt={product.name} src={product.imageUrl} />
               <div className='collection-component__meta-data'>
-                <span className='collection-component__product-name'>
-                  {product.name}
-                </span>
-                <span className='collection-component__price'>
-                  ${product.price}
-                </span>
+                <span>{product.name}</span>
+                <span>${product.price}</span>
               </div>
               <button
                 className='hidden'

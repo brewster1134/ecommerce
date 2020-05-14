@@ -10,7 +10,7 @@ const CategoryPage = (props) => {
   return (
     <div className='page-category'>
       <h2>{category.name}</h2>
-      <div className='category' id={`category_${props.match.params.category}`}>
+      <div id={`category_${props.match.params.category}`}>
         <CategoryComponent category={category} showImage={true} />
       </div>
     </div>

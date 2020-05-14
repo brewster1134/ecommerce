@@ -1,0 +1,27 @@
+=image-cta
+  border: none
+  display: inline-block
+  position: relative
+
+  img
+    border: 0.1em solid lightgrey
+    opacity: 1
+
+  div
+    background-color: white
+    border: 0.1em solid lightgrey
+    left: 50%
+    margin: 0
+    padding: 0.1em 0.3em
+    position: absolute
+    top: 50%
+    transform: translate(-50%, -50%)
+    transition: 0.2s
+
+  &:hover
+    img
+      opacity: 0.5
+
+    div
+      background-color: black
+      transform: translate(-50%, -50%) scale(2)

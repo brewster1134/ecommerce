@@ -2,7 +2,7 @@ import React from 'react'
 
 const CartProductComponent = ({ product }) => (
   <div className='cart-product-component'>
-    <div className='cart-product-component__meta-data'>
+    <div>
       <div>{product.name}</div>
       <div>
         {product.quantity} x ${product.price}

@@ -40,7 +40,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='ecommerce'>
+      <div>
         <HeaderComponent />
 
         <Switch>

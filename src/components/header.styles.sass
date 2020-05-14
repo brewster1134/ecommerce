@@ -1,74 +1,68 @@
 .header-component
-    border-bottom: 0.2em double grey
-    justify-content: space-between
     align-items: center
+    border-bottom: 0.2em double grey
     display: flex
+    justify-content: space-between
 
-    .header-component__home
-      align-items: center
-      display: flex
-
-      svg
-        margin-left: -20px
-        width: 100px
-
-      h1
-        margin: 0
+    svg
+      margin-left: -20px
+      width: 100px
 
     .header-component__links
+      display: flex
       justify-content: space-between
       text-align: right
-      display: flex
 
-      .cart
+      .header-component__cart
         position: relative
 
-        .icon
-          position: relative
+        .header-component__icon
           cursor: pointer
+          margin-right: 1em
+          position: relative
           width: 30px
 
           svg
             width: 30px
 
-          .cart-quantity
-            text-align: center
+          .header-component__cart-quantity
             position: absolute
-            width: 100%
+            text-align: center
             top: 12px
+            width: 100%
 
-        .dropdown
-          border: 0.2em solid grey
-          white-space: nowrap
-          position: absolute
-          overflow-y: scroll
+        .header-component__dropdown
           background: white
+          border: 0.2em solid grey
           max-height: 80vh
           min-width: 25vw
+          overflow-y: scroll
           padding: 1em
-          z-index: 1
+          position: absolute
           right: 0
+          white-space: nowrap
+          z-index: 1
 
           .cart-product-component
-            justify-content: flex-end
-            font-weight: lighter
             align-items: center
-            margin: 0 0 0.5em 0
-            font-size: 0.9em
             display: flex
+            font-size: 0.9em
+            font-weight: lighter
+            justify-content: flex-end
+            margin: 0 0 0.5em 0
 
             img
               display: inline-block
+              height: 50px
               margin-left: 0.5em
               object-fit: cover
-              height: 50px
               width: 50px
 
           button
-            width: 100%
             margin: 0
+            width: 100%
 
-      .auth
+      .header-component__auth
         font-size: 0.9em
 
         a
