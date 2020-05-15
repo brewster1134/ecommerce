@@ -9,14 +9,14 @@ const INITIAL_STATE = {
 
 // ACTIONS
 //
-export const toggleDropdown = (cart) => ({
-  type: actionTypes.cart.TOGGLE_DROPDOWN,
-  payload: cart
-})
-
 export const addProduct = (product) => ({
   type: actionTypes.cart.ADD_PRODUCT,
   payload: product
+})
+
+export const toggleDropdown = (visible) => ({
+  type: actionTypes.cart.TOGGLE_DROPDOWN,
+  payload: visible
 })
 
 // REDUCER
@@ -24,9 +24,12 @@ export const addProduct = (product) => ({
 export const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.cart.TOGGLE_DROPDOWN:
+      const visible =
+        action.payload === undefined ? !state.dropdownVisible : action.payload
+
       return {
         ...state,
-        dropdownVisible: !state.dropdownVisible
+        dropdownVisible: visible
       }
     case actionTypes.cart.ADD_PRODUCT:
       return {
@@ -51,6 +54,13 @@ export const selectProducts = createSelector(
 export const selectCartQuantity = createSelector(selectProducts, (products) =>
   products.reduce(
     (totalQuantity, product) => totalQuantity + product.quantity,
+    0
+  )
+)
+
+export const selectCartTotal = createSelector(selectProducts, (products) =>
+  products.reduce(
+    (totalCost, product) => totalCost + product.price * product.quantity,
     0
   )
 )

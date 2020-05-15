@@ -4,11 +4,12 @@ import { useHistory } from 'react-router-dom'
 import React from 'react'
 
 import './cart-dropdown.styles.sass'
-import { selectProducts } from '../state/cart.state'
+import { selectProducts, toggleDropdown } from '../state/cart.state'
 
-const CartDropdownComponent = ({ products }) => {
+const CartDropdownComponent = ({ products, toggleDropdown }) => {
   const history = useHistory()
   const handleClick = () => {
+    toggleDropdown(false)
     history.push('/checkout')
   }
 
@@ -42,4 +43,11 @@ const mapStateToProps = createStructuredSelector({
   products: selectProducts
 })
 
-export default connect(mapStateToProps)(CartDropdownComponent)
+const mapDispatchToProps = (dispatch) => ({
+  toggleDropdown: (visible) => dispatch(toggleDropdown(visible))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CartDropdownComponent)

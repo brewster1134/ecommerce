@@ -12,7 +12,6 @@ import CartDropdownComponent from './cart-dropdown.component'
 import {
   selectCartQuantity,
   selectDropdownVisible,
-  selectProducts,
   toggleDropdown
 } from '../state/cart.state'
 
@@ -20,7 +19,6 @@ const HeaderComponent = ({
   cartQuantity,
   currentUser,
   dropdownVisible,
-  products,
   toggleDropdown
 }) => {
   return (
@@ -69,8 +67,7 @@ const HeaderComponent = ({
 const mapStateToProps = createStructuredSelector({
   cartQuantity: selectCartQuantity,
   currentUser: selectCurrentUser,
-  dropdownVisible: selectDropdownVisible,
-  products: selectProducts
+  dropdownVisible: selectDropdownVisible
 })
 
 const mapDispatchToProps = (dispatch) => ({
