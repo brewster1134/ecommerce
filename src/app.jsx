@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { Switch, Redirect, Route } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import React from 'react'
 
 import './App.sass'
 import { auth, userCreateRef } from './utils/firebase'
 import { selectCurrentUser, userSetCurrent } from './state/user.state'
 import CategoryPage from './pages/category.page'
+import CheckoutPage from './pages/checkout.page'
 import CollectionPage from './pages/collection.page'
 import HeaderComponent from './components/header.component'
 import HomePage from './pages/home.page'
@@ -50,6 +51,7 @@ class App extends React.Component {
             path='/'
             component={() => <HomePage data={StoreData} />}
           />
+
           <Route
             exact
             path='/login'
@@ -57,6 +59,8 @@ class App extends React.Component {
               this.props.currentUser ? <Redirect to='/' /> : <LoginPage />
             }
           />
+
+          <Route exact path='/checkout' component={() => <CheckoutPage />} />
 
           <Route
             exact
