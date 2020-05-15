@@ -4,9 +4,8 @@
     display: flex
     justify-content: space-between
 
-    svg
-      margin-left: -20px
-      width: 100px
+    .header-component__logo
+      width: 55px
 
     .header-component__links
       display: flex
@@ -20,18 +19,21 @@
           cursor: pointer
           margin-right: 1em
           position: relative
-          width: 30px
 
           svg
-            width: 30px
+            width: 40px
 
           .header-component__cart-quantity
+            font-weight: normal
+            left: 2px
             position: absolute
             text-align: center
-            top: 12px
+            top: 8px
             width: 100%
 
       .header-component__auth
+        align-items: center
+        display: flex
         font-size: 0.9em
 
         a

@@ -5,16 +5,16 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 
 import './header.styles.sass'
-import { ReactComponent as LogoIcon } from '../assets/logo.svg'
-import { ReactComponent as ShoppingBagIcon } from '../assets/bag.svg'
+import { ReactComponent as CartIcon } from '../assets/cart.svg'
+import { ReactComponent as LogoIcon } from '../assets/m.svg'
+import { selectCurrentUser } from '../state/user.state'
+import CartDropdownComponent from './cart-dropdown.component'
 import {
   selectCartQuantity,
   selectDropdownVisible,
   selectProducts,
   toggleDropdown
 } from '../state/cart.state'
-import { selectCurrentUser } from '../state/user.state'
-import CartDropdownComponent from './cart-dropdown.component'
 
 const HeaderComponent = ({
   cartQuantity,
@@ -26,7 +26,7 @@ const HeaderComponent = ({
   return (
     <div className='header-component'>
       <Link to='/' key='home'>
-        <LogoIcon />
+        <LogoIcon className='header-component__logo' />
       </Link>
 
       <Link to='/mens' key='mens'>
@@ -40,7 +40,7 @@ const HeaderComponent = ({
       <div className='header-component__links'>
         <div className='header-component__cart'>
           <div className='header-component__cart-icon' onClick={toggleDropdown}>
-            <ShoppingBagIcon />
+            <CartIcon />
             <div className='header-component__cart-quantity'>
               {cartQuantity}
             </div>
