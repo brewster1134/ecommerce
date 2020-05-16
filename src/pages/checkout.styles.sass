@@ -1,9 +1,4 @@
-=checkout-row()
-  display: grid
-  grid-template-columns: 1fr 3fr 1fr 1fr 1fr
-  text-align: center
-  div
-    padding: 0.2em
+@import '../utils/mixins.sass'
 
 .checkout-page
   margin: 0 auto
@@ -16,17 +11,6 @@
     font-weight: normal
     margin: 2em 0 1em 0
     text-transform: uppercase
-
-  .checkout-page__product
-    +checkout-row
-
-    img
-      width: 100%
-
-    .remove
-      span
-        font-size: 0.8em
-        cursor: pointer
 
   .cart-total
     text-align: right

@@ -14,6 +14,16 @@ export const addProduct = (product) => ({
   payload: product
 })
 
+export const removeProduct = (product) => ({
+  type: actionTypes.cart.REMOVE_PRODUCT,
+  payload: product
+})
+
+export const subtractProduct = (product) => ({
+  type: actionTypes.cart.SUBTRACT_PRODUCT,
+  payload: product
+})
+
 export const toggleDropdown = (visible) => ({
   type: actionTypes.cart.TOGGLE_DROPDOWN,
   payload: visible
@@ -23,6 +33,26 @@ export const toggleDropdown = (visible) => ({
 //
 export const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case actionTypes.cart.ADD_PRODUCT:
+      return {
+        ...state,
+        products: addProductQuantity(state.products, action.payload)
+      }
+
+    case actionTypes.cart.REMOVE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter(
+          (product) => product.id !== action.payload.id
+        )
+      }
+
+    case actionTypes.cart.SUBTRACT_PRODUCT:
+      return {
+        ...state,
+        products: removeProductQuantity(state.products, action.payload)
+      }
+
     case actionTypes.cart.TOGGLE_DROPDOWN:
       const visible =
         action.payload === undefined ? !state.dropdownVisible : action.payload
@@ -31,12 +61,6 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         dropdownVisible: visible
       }
-    case actionTypes.cart.ADD_PRODUCT:
-      return {
-        ...state,
-        products: addProductQuantity(state.products, action.payload)
-      }
-
     default:
       return state
   }
@@ -89,4 +113,26 @@ const addProductQuantity = (existingProducts, newProduct) => {
 
   // if product does not exist, set the quantity to 1
   return [...existingProducts, { ...newProduct, quantity: 1 }]
+}
+
+const removeProductQuantity = (existingProducts, productToRemove) => {
+  // find product
+  const existingProduct = existingProducts.find(
+    (product) => product.id === productToRemove.id
+  )
+
+  // if only 1 in cart, remove entire product
+  if (existingProduct.quantity === 1) {
+    return existingProducts.filter(
+      (product) => product.id !== productToRemove.id
+    )
+
+    // if more than 1 in cart, just remove 1
+  } else {
+    return existingProducts.map((product) =>
+      product.id === productToRemove.id
+        ? { ...product, quantity: product.quantity - 1 }
+        : product
+    )
+  }
 }
