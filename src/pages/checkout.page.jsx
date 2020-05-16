@@ -28,7 +28,7 @@ const CheckoutPage = ({ products, cartTotal }) => {
           <div>{product.quantity}</div>
           <div>${product.price}</div>
           <div className='remove'>
-            <span></span>
+            <span>&#x274C;</span>
           </div>
         </div>
       ))}

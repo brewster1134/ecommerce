@@ -5,33 +5,6 @@
   div
     padding: 0.2em
 
-=remove-button($diameter: 13px, $thickness: 1px)
-  border-radius: 50%
-  border: $thickness solid grey
-  cursor: pointer
-  display: inline-block
-  height: $diameter
-  position: relative
-  top: $thickness
-  width: $diameter
-  &:after,
-  &:before
-    background-color: grey
-    content: ' '
-    height: $diameter
-    left: ($diameter - $thickness) / 2
-    position: absolute
-    width: $thickness
-  &:after
-    transform: rotate(45deg)
-  &:before
-    transform: rotate(-45deg)
-  &:hover
-    border-color: red
-    &:after,
-    &:before
-      background-color: red
-
 .checkout-page
   margin: 0 auto
   width: 80%
@@ -52,7 +25,8 @@
 
     .remove
       span
-        +remove-button
+        font-size: 0.8em
+        cursor: pointer
 
   .cart-total
     text-align: right
