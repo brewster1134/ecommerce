@@ -1,18 +1,17 @@
-import React from 'react'
 import { withRouter } from 'react-router-dom'
+import React from 'react'
 
+import './collection.styles.sass'
 import CollectionComponent from '../components/collection.component'
 
-const CollectionPage = (props) => {
-  const category = props.data.categories[props.match.params.category]
-  const collection = category.collections[props.match.params.collection]
+const CollectionPage = ({ categories, match }) => {
+  const category = categories[match.params.category]
+  const collection = category.collections[match.params.collection]
 
   return (
-    <div className='page-collection'>
-      <CollectionComponent
-        categoryName={category.name}
-        collection={collection}
-      />
+    <div className='collection-page'>
+      <h4 className='collection-page__collection-name'>{collection.name}</h4>
+      <CollectionComponent collection={collection} />
     </div>
   )
 }

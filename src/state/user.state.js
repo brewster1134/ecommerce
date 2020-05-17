@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 
 // ACTIONS
 //
-export const userSetCurrent = (user) => ({
+export const setCurrentUser = (user) => ({
   type: actionTypes.user.SET_CURRENT_USER,
   payload: user
 })

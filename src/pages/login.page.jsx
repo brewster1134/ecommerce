@@ -5,7 +5,7 @@ import LoginComponent from '../components/login.component'
 import RegisterComponent from '../components/register.component'
 
 const LoginPage = () => (
-  <div className='page-login'>
+  <div className='login-page'>
     <LoginComponent />
     <RegisterComponent />
   </div>

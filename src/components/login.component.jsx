@@ -55,9 +55,9 @@ class LoginComponent extends React.Component {
           <button type='submit'>Login w/ Email</button>
 
           <hr />
-
-          {/* google auth form */}
         </form>
+
+        {/* google auth form */}
         <form>
           <button onClick={signInWithGoogle}>Login w/ Google</button>
         </form>

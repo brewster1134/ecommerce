@@ -61,6 +61,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         dropdownVisible: visible
       }
+
     default:
       return state
   }

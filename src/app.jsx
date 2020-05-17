@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom'
 import React from 'react'
 
 import './App.sass'
 import { auth, userCreateRef } from './utils/firebase'
-import { selectCurrentUser, userSetCurrent } from './state/user.state'
+import { selectCurrentUser, setCurrentUser } from './state/user.state'
 import CategoryPage from './pages/category.page'
 import CheckoutPage from './pages/checkout.page'
 import CollectionPage from './pages/collection.page'
@@ -18,20 +18,22 @@ class App extends React.Component {
   authUnsubscribe = null
 
   componentDidMount() {
-    const { userSetCurrent } = this.props
+    const { history, setCurrentUser } = this.props
 
     this.authUnsubscribe = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await userCreateRef(userAuth)
 
         userRef.onSnapshot((snapshot) => {
-          userSetCurrent({
+          setCurrentUser({
             id: snapshot.id,
             ...snapshot.data()
           })
         })
+
+        history.push('/')
       } else {
-        userSetCurrent(null)
+        setCurrentUser(null)
       }
     })
   }
@@ -49,14 +51,14 @@ class App extends React.Component {
           <Route
             exact
             path='/'
-            component={() => <HomePage data={StoreData} />}
+            component={() => <HomePage categories={StoreData.categories} />}
           />
 
           <Route
             exact
             path='/login'
             render={() =>
-              this.props.currentUser ? <Redirect to='/' /> : <LoginPage />
+              this.currentUser ? <Redirect to='/' /> : <LoginPage />
             }
           />
 
@@ -65,13 +67,15 @@ class App extends React.Component {
           <Route
             exact
             path={`/:category`}
-            component={() => <CategoryPage data={StoreData} />}
+            component={() => <CategoryPage categories={StoreData.categories} />}
           />
 
           <Route
             exact
             path={`/:category/:collection`}
-            component={() => <CollectionPage data={StoreData} />}
+            component={() => (
+              <CollectionPage categories={StoreData.categories} />
+            )}
           />
         </Switch>
       </div>
@@ -84,7 +88,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  userSetCurrent: (user) => dispatch(userSetCurrent(user))
+  setCurrentUser: (user) => dispatch(setCurrentUser(user))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

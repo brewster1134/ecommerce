@@ -3,26 +3,24 @@ import { Link } from 'react-router-dom'
 
 import './category.styles.sass'
 
-const CategoryComponent = (props) => (
+const CategoryComponent = ({ category, showImage }) => (
   <div
-    className={`category-component ${!!props.showImage ? 'has-image' : ''}`}
-    id={`category_${props.category.id}`}
+    className={`category-component ${!!showImage ? 'has-image' : ''}`}
+    id={`category_${category.id}`}
   >
-    {Object.entries(props.category.collections).map(([key, collection]) => {
-      return (
-        <Link
-          className='category-component__cta'
-          to={`${props.category.id}/${collection.id}`}
-          key={collection.id}
-        >
-          {!!props.showImage ? (
-            <img src={collection.imageUrl} alt={collection.name} />
-          ) : null}
+    {Object.values(category.collections).map((collection) => (
+      <Link
+        className='category-component__cta'
+        to={`${category.id}/${collection.id}`}
+        key={collection.id}
+      >
+        {!!showImage ? (
+          <img src={collection.imageUrl} alt={collection.name} />
+        ) : null}
 
-          <div>{collection.name}</div>
-        </Link>
-      )
-    })}
+        <div>{collection.name}</div>
+      </Link>
+    ))}
   </div>
 )
 

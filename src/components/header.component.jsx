@@ -1,7 +1,7 @@
 import { auth } from '../utils/firebase'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import React from 'react'
 
 import './header.styles.sass'
@@ -20,49 +20,45 @@ const HeaderComponent = ({
   currentUser,
   dropdownVisible,
   toggleDropdown
-}) => {
-  return (
-    <div className='header-component'>
-      <Link to='/' key='home'>
-        <LogoIcon className='header-component__logo' />
-      </Link>
+}) => (
+  <div className='header-component'>
+    <NavLink to='/' key='home'>
+      <LogoIcon className='header-component__logo' />
+    </NavLink>
 
-      <Link to='/mens' key='mens'>
-        <h3>Mens</h3>
-      </Link>
+    <NavLink to='/mens' key='mens'>
+      <h3>Mens</h3>
+    </NavLink>
 
-      <Link to='/womens' key='womens'>
-        <h3>Womens</h3>
-      </Link>
+    <NavLink to='/womens' key='womens'>
+      <h3>Womens</h3>
+    </NavLink>
 
-      <div className='header-component__links'>
-        <div className='header-component__cart'>
-          <div className='header-component__cart-icon' onClick={toggleDropdown}>
-            <CartIcon />
-            <div className='header-component__cart-quantity'>
-              {cartQuantity}
+    <div className='header-component__links'>
+      <div className='header-component__cart'>
+        <div className='header-component__cart-icon' onClick={toggleDropdown}>
+          <CartIcon />
+          <div className='header-component__cart-quantity'>{cartQuantity}</div>
+        </div>
+        {dropdownVisible ? <CartDropdownComponent /> : null}
+      </div>
+      <div className='header-component__auth'>
+        {currentUser ? (
+          <div>
+            <div className='anchor' onClick={() => auth.signOut()}>
+              Logout
             </div>
+            <span>{currentUser.displayName}</span>
           </div>
-          {dropdownVisible ? <CartDropdownComponent /> : null}
-        </div>
-        <div className='header-component__auth'>
-          {currentUser ? (
-            <div>
-              <div className='anchor' onClick={() => auth.signOut()}>
-                Logout
-              </div>
-              <span>{currentUser.displayName}</span>
-            </div>
-          ) : (
-            <Link to='/login' key='login'>
-              Login
-            </Link>
-          )}
-        </div>
+        ) : (
+          <NavLink to='/login' key='login'>
+            Login
+          </NavLink>
+        )}
       </div>
     </div>
-  )
-}
+  </div>
+)
 
 const mapStateToProps = createStructuredSelector({
   cartQuantity: selectCartQuantity,
