@@ -12,8 +12,8 @@ const CheckoutPage = ({ products, cartTotal }) => {
       <div className='checkout-page__header'>
         <div></div>
         <div>Product</div>
-        <div>Quantity</div>
         <div>Price</div>
+        <div>Quantity</div>
         <div></div>
       </div>
       {products.map((product) => (

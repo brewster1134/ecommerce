@@ -20,6 +20,7 @@ const CartItemComponent = ({
         <img src={product.imageUrl} alt={product.name} />
       </div>
       <div>{product.name}</div>
+      <div>${product.price}</div>
       <div className='quantity'>
         <span className='subtract' onClick={handleSubtractProduct}>
           &#x276E;
@@ -29,7 +30,6 @@ const CartItemComponent = ({
           &#x276F;
         </span>
       </div>
-      <div>${product.price}</div>
       <div className='remove'>
         <span onClick={handleRemoveClick}>&#10005;</span>
       </div>
