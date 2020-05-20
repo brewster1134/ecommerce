@@ -1,12 +1,14 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { withRouter } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import React from 'react'
 
 import './cart-dropdown.styles.sass'
 import { selectProducts, toggleDropdown } from '../state/cart.state'
 
-const CartDropdownComponent = ({ history, products, toggleDropdown }) => {
+const CartDropdownComponent = ({ products, toggleDropdown }) => {
+  const history = useHistory()
+
   const handleClick = () => {
     toggleDropdown(false)
     history.push('/checkout')
@@ -46,6 +48,7 @@ const mapDispatchToProps = (dispatch) => ({
   toggleDropdown: (visible) => dispatch(toggleDropdown(visible))
 })
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CartDropdownComponent)
-)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CartDropdownComponent)

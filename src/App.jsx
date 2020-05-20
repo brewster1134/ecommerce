@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { Redirect, Route, Switch, withRouter } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import React from 'react'
 
 import './App.sass'
@@ -17,7 +17,7 @@ class App extends React.Component {
   authUnsubscribe = null
 
   componentDidMount() {
-    const { history, setCurrentUser } = this.props
+    const { setCurrentUser } = this.props
 
     this.authUnsubscribe = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -30,7 +30,7 @@ class App extends React.Component {
           })
         })
 
-        history.push('/')
+        return <Redirect to='/' />
       } else {
         setCurrentUser(null)
       }
@@ -47,18 +47,28 @@ class App extends React.Component {
         <HeaderComponent />
 
         <Switch>
-          <Route exact path='/' component={HomePage} />
+          <Route exact path='/'>
+            <HomePage />
+          </Route>
 
+          {/* TODO: use <Route children> instead of <Route render> https://reacttraining.com/blog/react-router-v5-1/#staying-ahead-of-the-curve
+            unclear how to use conditions within a route without using render
+          */}
           <Route
             exact
             path='/login'
             render={() =>
-              this.currentUser ? <Redirect to='/' /> : <LoginPage />
+              this.props.currentUser ? <Redirect to='/' /> : <LoginPage />
             }
           />
 
-          <Route exact path='/checkout' component={CheckoutPage} />
+          <Route exact path='/checkout'>
+            <CheckoutPage />
+          </Route>
 
+          {/* TODO: use <Route children> instead of <Route component> https://reacttraining.com/blog/react-router-v5-1/#staying-ahead-of-the-curve
+            when using <Route children>, throws the error `Cannot read property params of undefined`
+          */}
           <Route exact path={`/:category`} component={CategoryPage} />
 
           <Route
@@ -80,4 +90,4 @@ const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user))
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
+export default connect(mapStateToProps, mapDispatchToProps)(App)
