@@ -1,3 +1,10 @@
+### Production
+
+- public
+  - https://man-alive-ecommerce.herokuapp.com
+- git
+  - https://git.heroku.com/man-alive-ecommerce.git
+
 ### Deployment
 
 - set environment variable in .env file
