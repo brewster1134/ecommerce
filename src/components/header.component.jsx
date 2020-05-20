@@ -7,6 +7,7 @@ import React from 'react'
 import './header.styles.sass'
 import { ReactComponent as CartIcon } from '../assets/cart.svg'
 import { ReactComponent as LogoIcon } from '../assets/m.svg'
+import { selectCategories } from '../state/store.state'
 import { selectCurrentUser } from '../state/user.state'
 import CartDropdownComponent from './cart-dropdown.component'
 import {
@@ -16,6 +17,7 @@ import {
 } from '../state/cart.state'
 
 const HeaderComponent = ({
+  categories,
   cartQuantity,
   currentUser,
   dropdownVisible,
@@ -26,13 +28,11 @@ const HeaderComponent = ({
       <LogoIcon className='header-component__logo' />
     </NavLink>
 
-    <NavLink to='/mens' key='mens'>
-      <h3>Mens</h3>
-    </NavLink>
-
-    <NavLink to='/womens' key='womens'>
-      <h3>Womens</h3>
-    </NavLink>
+    {categories.map((category) => (
+      <NavLink to={`/${category.id}`} key={category.id}>
+        <h3>{category.name}</h3>
+      </NavLink>
+    ))}
 
     <div className='header-component__links'>
       <div className='header-component__cart'>
@@ -61,6 +61,7 @@ const HeaderComponent = ({
 )
 
 const mapStateToProps = createStructuredSelector({
+  categories: selectCategories,
   cartQuantity: selectCartQuantity,
   currentUser: selectCurrentUser,
   dropdownVisible: selectDropdownVisible
