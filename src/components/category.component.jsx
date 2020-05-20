@@ -10,9 +10,9 @@ const CategoryComponent = ({ category, showImage }) => (
   >
     {Object.values(category.collections).map((collection) => (
       <Link
+        key={collection.id}
         className='category-component__cta'
         to={`${category.id}/${collection.id}`}
-        key={collection.id}
       >
         {!!showImage ? (
           <img src={collection.imageUrl} alt={collection.name} />

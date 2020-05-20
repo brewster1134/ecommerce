@@ -20,7 +20,7 @@ const CartDropdownComponent = ({ products, toggleDropdown }) => {
         <div>
           <ul>
             {products.map((product) => (
-              <li className='cart-dropdown-component__product' key={product.id}>
+              <li key={product.id} className='cart-dropdown-component__product'>
                 <div>
                   <div>{product.name}</div>
                   <div>

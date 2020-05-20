@@ -9,7 +9,7 @@ import { selectCategories } from '../state/store.state'
 const HomePage = ({ categories }) => (
   <div className='home-page'>
     {categories.map((category) => (
-      <div className='home-page__category' key={category.id}>
+      <div key={category.id} className='home-page__category'>
         <Link to={category.id}>
           <img src={category.imageUrl} alt={category.name} />
           <div>{category.name}</div>
@@ -17,7 +17,7 @@ const HomePage = ({ categories }) => (
 
         <div className='home-page__collections'>
           {category.collections.map((collection) => (
-            <Link to={`${category.id}/${collection.id}`} key={collection.id}>
+            <Link key={collection.id} to={`${category.id}/${collection.id}`}>
               {collection.name}
             </Link>
           ))}

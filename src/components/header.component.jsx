@@ -29,7 +29,7 @@ const HeaderComponent = ({
     </NavLink>
 
     {categories.map((category) => (
-      <NavLink to={`/${category.id}`} key={category.id}>
+      <NavLink key={category.id} to={`/${category.id}`}>
         <h3>{category.name}</h3>
       </NavLink>
     ))}
