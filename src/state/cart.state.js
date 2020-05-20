@@ -14,6 +14,11 @@ export const addProduct = (product) => ({
   payload: product
 })
 
+export const clearCart = () => ({
+  type: actionTypes.cart.CLEAR_CART,
+  payload: null
+})
+
 export const removeProduct = (product) => ({
   type: actionTypes.cart.REMOVE_PRODUCT,
   payload: product
@@ -37,6 +42,12 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         products: addProductQuantity(state.products, action.payload)
+      }
+
+    case actionTypes.cart.CLEAR_CART:
+      return {
+        ...state,
+        products: []
       }
 
     case actionTypes.cart.REMOVE_PRODUCT:

@@ -5508,7 +5508,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:8.2.0":
+"dotenv@npm:8.2.0, dotenv@npm:^8":
   version: 8.2.0
   resolution: "dotenv@npm:8.2.0"
   checksum: 3/16cb89cbd7b98b053899b8aba8c5044c8fb61a2db8a81fe70360b75035fce5fed53bd7a34d772be717d0880c0321122a4c09423f518025e1b52d96791521b1a7
@@ -5551,16 +5551,19 @@ __metadata:
     "@testing-library/jest-dom": ^5
     "@testing-library/react": ^10
     "@testing-library/user-event": ^10
+    dotenv: ^8
     firebase: ^7
     node-sass: ^4
+    prop-types: ^15
     react: ^16
     react-dom: ^16
     react-redux: ^7
     react-router-dom: ^5
     react-scripts: ^3
+    react-stripe-checkout: ^2
     redux: ^4
     redux-logger: ^3
-    redux-persist: ^6.0.0
+    redux-persist: ^6
     reselect: ^4
   languageName: unknown
   linkType: soft
@@ -11963,7 +11966,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -12399,6 +12402,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"react-stripe-checkout@npm:^2":
+  version: 2.6.3
+  resolution: "react-stripe-checkout@npm:2.6.3"
+  checksum: 3/4131fb1106de3f619a204263369e8bdf176c9f3c33a7bf284c3b43adb21cd29263ea0b16842e4a3903ad6583990d2e2e0a6fdf275fb3bb0a717619e6f68fe1b3
+  languageName: node
+  linkType: hard
+
 "react@npm:^16":
   version: 16.13.1
   resolution: "react@npm:16.13.1"
@@ -12566,7 +12576,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"redux-persist@npm:^6.0.0":
+"redux-persist@npm:^6":
   version: 6.0.0
   resolution: "redux-persist@npm:6.0.0"
   peerDependencies:

@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import './checkout.styles.sass'
 import { selectProducts, selectCartTotal } from '../state/cart.state'
 import CartItemComponent from '../components/cart-item.component'
+import StripeCheckoutButton from '../components/stripe-checkout-button.component.jsx'
 
 const CheckoutPage = ({ products, cartTotal }) => (
   <div className='checkout-page'>
@@ -15,11 +16,27 @@ const CheckoutPage = ({ products, cartTotal }) => (
       <div>Quantity</div>
       <div></div>
     </div>
+
     {products.map((product) => (
       <CartItemComponent key={product.id} product={product} />
     ))}
-    <div className='cart-total'>
+
+    <div className='checkout-page__cart-total'>
       Total: <span>${cartTotal}</span>
+    </div>
+    <div className='checkout-page__checkout-button'>
+      <StripeCheckoutButton price={cartTotal} />
+    </div>
+    <div className='checkout-page__test-warning'>
+      <pre>
+        Test Payment # {process.env.NODE_ENV}
+        <br />
+        5555555555554444
+        <br />
+        CVV: Any 3 digits
+        <br />
+        EXP: Any future date
+      </pre>
     </div>
   </div>
 )
