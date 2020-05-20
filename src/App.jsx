@@ -12,7 +12,6 @@ import CollectionPage from './pages/collection.page'
 import HeaderComponent from './components/header.component'
 import HomePage from './pages/home.page'
 import LoginPage from './pages/login.page'
-import StoreData from './assets/store.data.json'
 
 class App extends React.Component {
   authUnsubscribe = null
@@ -48,11 +47,7 @@ class App extends React.Component {
         <HeaderComponent />
 
         <Switch>
-          <Route
-            exact
-            path='/'
-            component={() => <HomePage categories={StoreData.categories} />}
-          />
+          <Route exact path='/' component={HomePage} />
 
           <Route
             exact
@@ -62,20 +57,14 @@ class App extends React.Component {
             }
           />
 
-          <Route exact path='/checkout' component={() => <CheckoutPage />} />
+          <Route exact path='/checkout' component={CheckoutPage} />
 
-          <Route
-            exact
-            path={`/:category`}
-            component={() => <CategoryPage categories={StoreData.categories} />}
-          />
+          <Route exact path={`/:category`} component={CategoryPage} />
 
           <Route
             exact
             path={`/:category/:collection`}
-            component={() => (
-              <CollectionPage categories={StoreData.categories} />
-            )}
+            component={CollectionPage}
           />
         </Switch>
       </div>

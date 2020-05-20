@@ -25,8 +25,8 @@ const CheckoutPage = ({ products, cartTotal }) => (
 )
 
 const mapStateToProps = createStructuredSelector({
-  products: selectProducts,
-  cartTotal: selectCartTotal
+  cartTotal: selectCartTotal,
+  products: selectProducts
 })
 
 export default connect(mapStateToProps)(CheckoutPage)

@@ -1,17 +1,27 @@
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { Link, withRouter } from 'react-router-dom'
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 
-import CategoryComponent from '../components/category.component'
 import './category.styles.sass'
+import { selectCollections } from '../state/store.state'
 
-const CategoryPage = ({ categories, match }) => {
-  const category = categories[match.params.category]
+const CategoryPage = ({ collections, match }) => (
+  <div className='category-page'>
+    {collections.map((collection) => (
+      <Link
+        to={`${match.params.category}/${collection.id}`}
+        key={collection.id}
+      >
+        <img src={collection.imageUrl} alt={collection.name} />
+        <div>{collection.name}</div>
+      </Link>
+    ))}
+  </div>
+)
 
-  return (
-    <div className='category-page'>
-      <CategoryComponent category={category} showImage={true} />
-    </div>
-  )
-}
+const mapStateToProps = createStructuredSelector({
+  collections: selectCollections
+})
 
-export default withRouter(CategoryPage)
+export default withRouter(connect(mapStateToProps)(CategoryPage))

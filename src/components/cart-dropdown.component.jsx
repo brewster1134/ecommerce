@@ -6,7 +6,7 @@ import React from 'react'
 import './cart-dropdown.styles.sass'
 import { selectProducts, toggleDropdown } from '../state/cart.state'
 
-const CartDropdownComponent = ({ products, history, toggleDropdown }) => {
+const CartDropdownComponent = ({ history, products, toggleDropdown }) => {
   const handleClick = () => {
     toggleDropdown(false)
     history.push('/checkout')
