@@ -51,7 +51,7 @@ class App extends React.Component {
             <HomePage />
           </Route>
 
-          {/* TODO: use <Route children> instead of <Route render> https://reacttraining.com/blog/react-router-v5-1/#staying-ahead-of-the-curve
+          {/* TODO: use <Route children> instead of <Route render> https://github.com/ReactTraining/react-router/blob/f59ee5488bc343cf3c957b7e0cc395ef5eb572d2/docs/advanced-guides/migrating-5-to-6.md#relative-routes-and-links
             unclear how to use conditions within a route without using render
           */}
           <Route
@@ -66,7 +66,7 @@ class App extends React.Component {
             <CheckoutPage />
           </Route>
 
-          {/* TODO: use <Route children> instead of <Route component> https://reacttraining.com/blog/react-router-v5-1/#staying-ahead-of-the-curve
+          {/* TODO: use <Route children> instead of <Route component> https://github.com/ReactTraining/react-router/blob/f59ee5488bc343cf3c957b7e0cc395ef5eb572d2/docs/advanced-guides/migrating-5-to-6.md#relative-routes-and-links
             when using <Route children>, throws the error `Cannot read property params of undefined`
           */}
           <Route exact path={`/:category`} component={CategoryPage} />
