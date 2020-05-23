@@ -1,5 +1,5 @@
 import React from 'react'
-import { auth, userCreateRef } from '../utils/firebase'
+import { auth, createUserRef } from '../utils/firebase'
 
 class RegisterComponent extends React.Component {
   state = {
@@ -32,7 +32,7 @@ class RegisterComponent extends React.Component {
       )
 
       // save user to db
-      userCreateRef(user, { displayName })
+      createUserRef(user, { displayName })
 
       // update state of current user
       this.setState({ currentUser: user })
@@ -64,6 +64,7 @@ class RegisterComponent extends React.Component {
 
           <label htmlFor='email'>Email</label>
           <input
+            autoComplete='username'
             name='email'
             onChange={this.handleChange}
             type='email'
@@ -72,6 +73,7 @@ class RegisterComponent extends React.Component {
 
           <label htmlFor='password'>Password</label>
           <input
+            autoComplete='new-password'
             name='password'
             onChange={this.handleChange}
             type='password'
@@ -80,6 +82,7 @@ class RegisterComponent extends React.Component {
 
           <label htmlFor='confirmPassword'>Confirm Password</label>
           <input
+            autoComplete='new-password'
             name='confirmPassword'
             onChange={this.handleChange}
             type='password'

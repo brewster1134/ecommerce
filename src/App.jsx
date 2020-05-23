@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import React from 'react'
 
 import './App.sass'
-import { auth, userCreateRef } from './utils/firebase'
+import { auth, createUserRef } from './utils/firebase'
 import { selectCurrentUser, setCurrentUser } from './state/user.state'
 import CategoryPage from './pages/category.page'
 import CheckoutPage from './pages/checkout.page'
@@ -21,7 +21,7 @@ class App extends React.Component {
 
     this.authUnsubscribe = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
-        const userRef = await userCreateRef(userAuth)
+        const userRef = await createUserRef(userAuth)
 
         userRef.onSnapshot((snapshot) => {
           setCurrentUser({

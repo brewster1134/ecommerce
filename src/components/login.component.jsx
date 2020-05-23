@@ -36,6 +36,7 @@ class LoginComponent extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='email'>E-mail</label>
           <input
+            autoComplete='username'
             name='email'
             onChange={this.handleChange}
             type='email'
@@ -45,6 +46,7 @@ class LoginComponent extends React.Component {
 
           <label htmlFor='password'>Password</label>
           <input
+            autoComplete='current-password'
             name='password'
             onChange={this.handleChange}
             type='password'
