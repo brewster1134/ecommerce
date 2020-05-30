@@ -7,6 +7,7 @@ import { cartReducer } from './cart.state'
 import { storeReducer } from './store.state'
 import { userReducer } from './user.state'
 
+//
 // REDUCERS
 //
 const rootReducer = combineReducers({
@@ -23,6 +24,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
+//
 // STORE
 //
 const middleware = []

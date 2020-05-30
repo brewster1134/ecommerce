@@ -9,15 +9,18 @@ import { selectCategories } from '../state/store.state'
 const HomePage = ({ categories }) => (
   <div className='home-page'>
     {categories.map((category) => (
-      <div key={category.id} className='home-page__category'>
-        <Link to={category.id}>
+      <div key={category.route} className='home-page__category'>
+        <Link to={category.route}>
           <img src={category.imageUrl} alt={category.name} />
           <div>{category.name}</div>
         </Link>
 
         <div className='home-page__collections'>
           {category.collections.map((collection) => (
-            <Link key={collection.id} to={`${category.id}/${collection.id}`}>
+            <Link
+              key={collection.route}
+              to={`${category.route}/${collection.route}`}
+            >
               {collection.name}
             </Link>
           ))}

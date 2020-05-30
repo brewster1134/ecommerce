@@ -1,21 +1,41 @@
 import { createSelector } from 'reselect'
 
-import StoreCategories from '../assets/store.categories.json'
+import actionTypes from './action-types'
+
 import StoreCollections from '../assets/store.collections.json'
 import StoreProducts from '../assets/store.products.json'
 
 const INITIAL_STATE = {
-  categories: StoreCategories,
+  categories: [],
   collections: StoreCollections,
   products: StoreProducts
 }
 
+//
+// ACTIONS
+//
+export const updateCategories = (categories) => ({
+  type: actionTypes.store.UPDATE_CATEGORIES,
+  payload: categories
+})
+
+//
 // REDUCERS
 //
 export const storeReducer = (state = INITIAL_STATE, action) => {
-  return state
+  switch (action.type) {
+    case actionTypes.store.UPDATE_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload
+      }
+
+    default:
+      return state
+  }
 }
 
+//
 // SELECTORS
 //
 const selectStore = (state) => state.store

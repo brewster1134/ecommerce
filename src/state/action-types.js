@@ -8,6 +8,9 @@ const actionTypes = {
   },
   user: {
     SET_CURRENT_USER: 'SET_CURRENT_USER'
+  },
+  store: {
+    UPDATE_CATEGORIES: 'UPDATE_CATEGORIES'
   }
 }
 

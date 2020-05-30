@@ -4,7 +4,8 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import React from 'react'
 
 import './App.sass'
-import { auth, createUserRef } from './utils/firebase'
+import { auth, createUserRef, firestore } from './utils/firebase'
+import { updateCategories } from './state/store.state'
 import { selectCurrentUser, setCurrentUser } from './state/user.state'
 import CategoryPage from './pages/category.page'
 import CheckoutPage from './pages/checkout.page'
@@ -15,10 +16,48 @@ import LoginPage from './pages/login.page'
 
 class App extends React.Component {
   authUnsubscribe = null
+  categoriesUnsubscribe = null
 
   componentDidMount() {
-    const { setCurrentUser } = this.props
+    const { setCurrentUser, updateCategories } = this.props
 
+    // DATABASE
+    // get all categories
+    const categoriesRef = firestore.collection('categories')
+
+    // subscribe to categories snapshot
+    this.categoriesUnsubscribe = categoriesRef.onSnapshot(async (snapshot) => {
+      // get all categories, and resolve promises
+      const categoriesDocs = await Promise.all(
+        snapshot.docs.map(async (category) => {
+          // get the category data (minus the collections sub-collection)
+          const catData = category.data()
+
+          // get the category collections ref
+          const catCollectionsRef = category.ref.collection('collections')
+
+          // get the category collections
+          const catCollections = await catCollectionsRef.get()
+
+          // get the category collections data
+          const catCollectionsData = catCollections.docs.map((collection) =>
+            collection.data()
+          )
+
+          // set collections data to the rest of the category data
+          catData.collections = catCollectionsData
+
+          // return the full category data
+          return catData
+        })
+      )
+
+      // update state with categories
+      updateCategories(categoriesDocs)
+    })
+
+    // AUTH
+    //
     this.authUnsubscribe = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserRef(userAuth)
@@ -39,6 +78,7 @@ class App extends React.Component {
 
   componentWillUnmount() {
     this.authUnsubscribe()
+    this.categoriesUnsubscribe()
   }
 
   render() {
@@ -87,7 +127,8 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user))
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  updateCategories: (categories) => dispatch(updateCategories(categories))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

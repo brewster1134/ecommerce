@@ -2,6 +2,10 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 
+//
+// CONFIG
+//
+// https://console.firebase.google.com/project/react-ecommerce-firebase/settings/general
 const firebaseConfig = {
   apiKey: 'AIzaSyDgGZOYSIY9ms9_nVFTFpEFqG4DWLAlv4U',
   authDomain: 'react-ecommerce-firebase.firebaseapp.com',
@@ -23,6 +27,9 @@ const provider = new firebase.auth.GoogleAuthProvider()
 provider.setCustomParameters({ prompt: 'select_account' })
 export const signInWithGoogle = () => auth.signInWithPopup(provider)
 
+//
+// UTILITIES
+//
 // save user to database
 export const createUserRef = async (userAuth, additionalData) => {
   if (!userAuth) return null

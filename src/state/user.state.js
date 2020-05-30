@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   currentUser: null
 }
 
+//
 // ACTIONS
 //
 export const setCurrentUser = (user) => ({
@@ -13,6 +14,7 @@ export const setCurrentUser = (user) => ({
   payload: user
 })
 
+//
 // REDUCER
 //
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -28,6 +30,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
   }
 }
 
+//
 // SELECTORS
 //
 const selectUser = (state) => state.user

@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   products: []
 }
 
+//
 // ACTIONS
 //
 export const addProduct = (product) => ({
@@ -34,6 +35,7 @@ export const toggleDropdown = (visible) => ({
   payload: visible
 })
 
+//
 // REDUCER
 //
 export const cartReducer = (state = INITIAL_STATE, action) => {
@@ -78,6 +80,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
   }
 }
 
+//
 // SELECTORS
 //
 const selectCart = (state) => state.cart
@@ -106,6 +109,7 @@ export const selectDropdownVisible = createSelector(
   (cart) => cart.dropdownVisible
 )
 
+//
 // UTILITIES
 //
 const addProductQuantity = (existingProducts, newProduct) => {
