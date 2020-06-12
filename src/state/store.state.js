@@ -2,12 +2,10 @@ import { createSelector } from 'reselect'
 
 import actionTypes from './action-types'
 
-import StoreCollections from '../assets/store.collections.json'
 import StoreProducts from '../assets/store.products.json'
 
 const INITIAL_STATE = {
-  categories: [],
-  collections: StoreCollections,
+  categories: {},
   products: StoreProducts
 }
 
@@ -48,9 +46,9 @@ export const selectCategories = createSelector(
 )
 
 export const selectCollections = createSelector(
-  selectStore,
+  selectCategories,
   selectParams,
-  (store, params) => store.collections[params.category]
+  (categories, params) => categories[params.category].collections
 )
 
 export const selectProducts = createSelector(
@@ -58,3 +56,41 @@ export const selectProducts = createSelector(
   selectParams,
   (store, params) => store.products[params.category][params.collection]
 )
+
+//
+// UTILITIES
+//
+const mapCollectionBy = (collection, key = 'route') => {
+  return collection.reduce((accumulator, item) => {
+    accumulator[item[key]] = item
+    return accumulator
+  }, {})
+}
+
+export const fetchCategories = async (categories) => {
+  const fullCats = await Promise.all(
+    categories.map(async (category) => {
+      // get the category data (minus the collections sub-collection)
+      const catData = category.data()
+
+      // get the category collections ref
+      const catCollectionsRef = category.ref.collection('collections')
+
+      // get the category collections
+      const catCollections = await catCollectionsRef.get()
+
+      // get the category collections data
+      const catCollectionsData = catCollections.docs.map((collection) =>
+        collection.data()
+      )
+
+      // set collections data to the rest of the category data
+      catData.collections = catCollectionsData
+
+      // return the full category data
+      return catData
+    })
+  )
+
+  return mapCollectionBy(fullCats)
+}

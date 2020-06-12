@@ -28,7 +28,7 @@ const HeaderComponent = ({
       <LogoIcon className='header-component__logo' />
     </NavLink>
 
-    {categories.map((category) => (
+    {Object.values(categories).map((category) => (
       <NavLink key={category.route} to={`/${category.route}`}>
         <h3>{category.name}</h3>
       </NavLink>

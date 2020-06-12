@@ -12,7 +12,7 @@ const CategoryPage = ({ collections }) => {
   return (
     <div className='category-page'>
       {collections.map((collection) => (
-        <Link key={collection.id} to={`${category}/${collection.id}`}>
+        <Link key={collection.route} to={`${category}/${collection.route}`}>
           <img src={collection.imageUrl} alt={collection.name} />
           <div>{collection.name}</div>
         </Link>

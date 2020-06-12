@@ -5,8 +5,8 @@ import React from 'react'
 
 import './App.sass'
 import { auth, createUserRef, firestore } from './utils/firebase'
-import { updateCategories } from './state/store.state'
 import { selectCurrentUser, setCurrentUser } from './state/user.state'
+import { fetchCategories, updateCategories } from './state/store.state'
 import CategoryPage from './pages/category.page'
 import CheckoutPage from './pages/checkout.page'
 import CollectionPage from './pages/collection.page'
@@ -21,41 +21,16 @@ class App extends React.Component {
   componentDidMount() {
     const { setCurrentUser, updateCategories } = this.props
 
+    //
     // DATABASE
-    // get all categories
+    //
     const categoriesRef = firestore.collection('categories')
-
-    // subscribe to categories snapshot
     this.categoriesUnsubscribe = categoriesRef.onSnapshot(async (snapshot) => {
-      // get all categories, and resolve promises
-      const categoriesDocs = await Promise.all(
-        snapshot.docs.map(async (category) => {
-          // get the category data (minus the collections sub-collection)
-          const catData = category.data()
-
-          // get the category collections ref
-          const catCollectionsRef = category.ref.collection('collections')
-
-          // get the category collections
-          const catCollections = await catCollectionsRef.get()
-
-          // get the category collections data
-          const catCollectionsData = catCollections.docs.map((collection) =>
-            collection.data()
-          )
-
-          // set collections data to the rest of the category data
-          catData.collections = catCollectionsData
-
-          // return the full category data
-          return catData
-        })
-      )
-
-      // update state with categories
-      updateCategories(categoriesDocs)
+      const fullCats = await fetchCategories(snapshot.docs)
+      updateCategories(fullCats)
     })
 
+    //
     // AUTH
     //
     this.authUnsubscribe = auth.onAuthStateChanged(async (userAuth) => {

@@ -8,7 +8,7 @@ import { selectCategories } from '../state/store.state'
 
 const HomePage = ({ categories }) => (
   <div className='home-page'>
-    {categories.map((category) => (
+    {Object.values(categories).map((category) => (
       <div key={category.route} className='home-page__category'>
         <Link to={category.route}>
           <img src={category.imageUrl} alt={category.name} />
