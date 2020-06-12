@@ -67,12 +67,12 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
       }
 
     case actionTypes.cart.TOGGLE_DROPDOWN:
-      const visible =
+      const dropdownVisible =
         action.payload === undefined ? !state.dropdownVisible : action.payload
 
       return {
         ...state,
-        dropdownVisible: visible
+        dropdownVisible
       }
 
     default:

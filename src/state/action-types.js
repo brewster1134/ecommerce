@@ -1,4 +1,7 @@
 const actionTypes = {
+  app: {
+    IS_LOADING: 'IS_LOADING'
+  },
   cart: {
     ADD_PRODUCT: 'ADD_PRODUCT',
     CLEAR_CART: 'CLEAR_CART',

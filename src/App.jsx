@@ -6,6 +6,7 @@ import React from 'react'
 import './App.sass'
 import { auth, createUserRef, firestore } from './utils/firebase'
 import { selectCurrentUser, setCurrentUser } from './state/user.state'
+import { toggleLoading, selectIsLoading } from './state/app.state'
 import {
   fetchCategories,
   updateCategories,
@@ -24,7 +25,12 @@ class App extends React.Component {
   productsUnsubscribe = null
 
   componentDidMount() {
-    const { setCurrentUser, updateCategories, updateProducts } = this.props
+    const {
+      setCurrentUser,
+      toggleLoading,
+      updateCategories,
+      updateProducts
+    } = this.props
 
     //
     // DATABASE
@@ -33,6 +39,7 @@ class App extends React.Component {
     this.categoriesUnsubscribe = categoriesRef.onSnapshot(async (snapshot) => {
       const fullCategories = await fetchCategories(snapshot.docs)
       updateCategories(fullCategories)
+      toggleLoading(false)
     })
 
     const productsRef = firestore.collection('products')
@@ -69,7 +76,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={`${this.props.isLoading ? 'is-loading' : ''}`}>
         <HeaderComponent />
 
         <Switch>
@@ -109,11 +116,13 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  isLoading: selectIsLoading
 })
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  toggleLoading: (isLoading) => dispatch(toggleLoading(isLoading)),
   updateCategories: (categories) => dispatch(updateCategories(categories)),
   updateProducts: (products) => dispatch(updateProducts(products))
 })
