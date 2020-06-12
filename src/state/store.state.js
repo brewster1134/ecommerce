@@ -2,11 +2,9 @@ import { createSelector } from 'reselect'
 
 import actionTypes from './action-types'
 
-import StoreProducts from '../assets/store.products.json'
-
 const INITIAL_STATE = {
   categories: {},
-  products: StoreProducts
+  products: []
 }
 
 //
@@ -15,6 +13,11 @@ const INITIAL_STATE = {
 export const updateCategories = (categories) => ({
   type: actionTypes.store.UPDATE_CATEGORIES,
   payload: categories
+})
+
+export const updateProducts = (products) => ({
+  type: actionTypes.store.UPDATE_PRODUCTS,
+  payload: getCollectionSnapshotData(products)
 })
 
 //
@@ -26,6 +29,12 @@ export const storeReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         categories: action.payload
+      }
+
+    case actionTypes.store.UPDATE_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload
       }
 
     default:
@@ -48,27 +57,37 @@ export const selectCategories = createSelector(
 export const selectCollections = createSelector(
   selectCategories,
   selectParams,
-  (categories, params) => categories[params.category].collections
+  (categories, params) =>
+    categories[params.category] ? categories[params.category].collections : []
 )
 
 export const selectProducts = createSelector(
   selectStore,
   selectParams,
-  (store, params) => store.products[params.category][params.collection]
+  (store, params) => {
+    return store.products.filter(
+      (product) =>
+        product.categories.includes(params.category) &&
+        product.collections.includes(params.collection)
+    )
+  }
 )
 
 //
 // UTILITIES
 //
-const mapCollectionBy = (collection, key = 'route') => {
-  return collection.reduce((accumulator, item) => {
-    accumulator[item[key]] = item
-    return accumulator
-  }, {})
+export const getCollectionSnapshotData = (collectionSnapshot) => {
+  return collectionSnapshot.docs.map((docSnapshot) => {
+    return {
+      id: docSnapshot.id,
+      ...docSnapshot.data()
+    }
+  })
 }
 
+// TODO: convert to async redux action
 export const fetchCategories = async (categories) => {
-  const fullCats = await Promise.all(
+  const fullCategories = await Promise.all(
     categories.map(async (category) => {
       // get the category data (minus the collections sub-collection)
       const catData = category.data()
@@ -80,9 +99,7 @@ export const fetchCategories = async (categories) => {
       const catCollections = await catCollectionsRef.get()
 
       // get the category collections data
-      const catCollectionsData = catCollections.docs.map((collection) =>
-        collection.data()
-      )
+      const catCollectionsData = getCollectionSnapshotData(catCollections)
 
       // set collections data to the rest of the category data
       catData.collections = catCollectionsData
@@ -92,5 +109,8 @@ export const fetchCategories = async (categories) => {
     })
   )
 
-  return mapCollectionBy(fullCats)
+  return fullCategories.reduce((accumulator, item) => {
+    accumulator[item['route']] = item
+    return accumulator
+  }, {})
 }
