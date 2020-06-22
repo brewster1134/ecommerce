@@ -2,6 +2,7 @@ import { auth } from '../utils/firebase'
 import { clearCart } from '../state/cart.state'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import { NavLink } from 'react-router-dom'
 import { selectCurrentUser } from '../state/user.state'
 import { useHistory } from 'react-router-dom'
 import React from 'react'
@@ -36,7 +37,11 @@ const StripeCheckoutButton = ({ clearCart, currentUser, price }) => {
         >
           <button>Pay Now</button>
         </StripeCheckout>
-      ) : null}
+      ) : (
+        <NavLink to='/login' key='login'>
+          Login to Pay...
+        </NavLink>
+      )}
     </div>
   )
 }

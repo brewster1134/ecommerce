@@ -29,9 +29,9 @@ const CheckoutPage = ({ products, cartTotal }) => (
     </div>
     <div className='checkout-page__test-warning'>
       <pre>
-        Test Payment # {process.env.NODE_ENV}
+        Test Payment Info
         <br />
-        5555555555554444
+        CARD #: 5555-5555-5555-4444
         <br />
         CVV: Any 3 digits
         <br />
