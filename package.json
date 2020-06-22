@@ -5,7 +5,7 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5",
     "@testing-library/react": "^10",
-    "@testing-library/user-event": "^10",
+    "@testing-library/user-event": "^12",
     "dotenv": "^8",
     "firebase": "^7",
     "prop-types": "^15",
