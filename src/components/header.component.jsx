@@ -7,7 +7,7 @@ import React from 'react'
 import './header.styles.sass'
 import { ReactComponent as CartIcon } from '../assets/cart.svg'
 import { ReactComponent as LogoIcon } from '../assets/m.svg'
-import { selectErrorMessage } from '../state/app.state'
+import { selectErrorMessage, selectIsLoading } from '../state/app.state'
 import { selectCategories } from '../state/store.state'
 import { selectCurrentUser } from '../state/user.state'
 import CartDropdownComponent from './cart-dropdown.component'
@@ -23,13 +23,23 @@ const HeaderComponent = ({
   currentUser,
   dropdownVisible,
   errorMessage,
+  isLoading,
   toggleDropdown
 }) => (
   <div className='header-component'>
     <div className='header-component__main'>
-      <NavLink to='/' key='home'>
-        <LogoIcon className='header-component__logo' />
+      <NavLink className='header-component__logo' to='/' key='home'>
+        <LogoIcon />
       </NavLink>
+
+      {isLoading ? (
+        <div className='header-component__is-loading'>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      ) : null}
 
       {Object.values(categories).map((category) => (
         <NavLink key={category.route} to={`/${category.route}`}>
@@ -74,7 +84,8 @@ const mapStateToProps = createStructuredSelector({
   cartQuantity: selectCartQuantity,
   currentUser: selectCurrentUser,
   dropdownVisible: selectDropdownVisible,
-  errorMessage: selectErrorMessage
+  errorMessage: selectErrorMessage,
+  isLoading: selectIsLoading
 })
 
 const mapDispatchToProps = (dispatch) => ({

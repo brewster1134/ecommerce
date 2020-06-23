@@ -6,7 +6,6 @@ import React from 'react'
 import './App.sass'
 import { auth, createUserRef } from './utils/firebase'
 import { selectCurrentUser, setCurrentUser } from './state/user.state'
-import { selectIsLoading } from './state/app.state'
 import { fetchCategories } from './state/store.state'
 import CategoryPage from './pages/category.page'
 import CheckoutPage from './pages/checkout.page'
@@ -54,10 +53,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { currentUser, isLoading } = this.props
+    const { currentUser } = this.props
 
     return (
-      <div className={`${isLoading ? 'is-loading' : ''}`}>
+      <div>
         <HeaderComponent />
 
         <Switch>
@@ -95,8 +94,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  isLoading: selectIsLoading
+  currentUser: selectCurrentUser
 })
 
 const mapDispatchToProps = (dispatch) => ({
