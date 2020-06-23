@@ -2,6 +2,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { persistReducer, persistStore } from 'redux-persist'
 import logger from 'redux-logger'
 import storage from 'redux-persist/lib/storage'
+import thunk from 'redux-thunk'
 
 import { appReducer } from './app.state'
 import { cartReducer } from './cart.state'
@@ -29,7 +30,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 //
 // STORE
 //
-const middleware = []
+const middleware = [thunk]
 
 if (process.env.NODE_ENV === 'development') {
   middleware.push(logger)

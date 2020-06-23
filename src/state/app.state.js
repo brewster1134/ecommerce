@@ -3,14 +3,20 @@ import { createSelector } from 'reselect'
 import actionTypes from './action-types'
 
 const INITIAL_STATE = {
-  isLoading: true
+  errorMessage: '',
+  isLoading: false
 }
 
 //
 // ACTIONS
 //
-export const toggleLoading = (isLoading) => ({
-  type: actionTypes.app.IS_LOADING,
+export const setErrorMessage = (errorMessage) => ({
+  type: actionTypes.store.SET_ERROR_MESSAGE,
+  payload: errorMessage
+})
+
+export const toggleIsLoading = (isLoading) => ({
+  type: actionTypes.app.TOGGLE_IS_LOADING,
   payload: isLoading
 })
 
@@ -19,13 +25,19 @@ export const toggleLoading = (isLoading) => ({
 //
 export const appReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case actionTypes.app.IS_LOADING:
+    case actionTypes.app.TOGGLE_IS_LOADING:
       const isLoading =
         action.payload === undefined ? !state.isLoading : action.payload
 
       return {
         ...state,
         isLoading
+      }
+
+    case actionTypes.store.SET_ERROR_MESSAGE:
+      return {
+        ...state,
+        errorMessage: action.payload
       }
 
     default:
@@ -37,5 +49,10 @@ export const appReducer = (state = INITIAL_STATE, action) => {
 // SELECTORS
 //
 const selectApp = (state) => state.app
+
+export const selectErrorMessage = createSelector(
+  selectApp,
+  (app) => app.errorMessage
+)
 
 export const selectIsLoading = createSelector(selectApp, (app) => app.isLoading)

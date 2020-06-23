@@ -1,6 +1,7 @@
 const actionTypes = {
   app: {
-    IS_LOADING: 'IS_LOADING'
+    SET_ERROR_MESSAGE: 'SET_ERROR_MESSAGE',
+    TOGGLE_IS_LOADING: 'TOGGLE_IS_LOADING'
   },
   cart: {
     ADD_PRODUCT: 'ADD_PRODUCT',

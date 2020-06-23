@@ -4,14 +4,10 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import React from 'react'
 
 import './App.sass'
-import { auth, createUserRef, firestore } from './utils/firebase'
+import { auth, createUserRef } from './utils/firebase'
 import { selectCurrentUser, setCurrentUser } from './state/user.state'
-import { toggleLoading, selectIsLoading } from './state/app.state'
-import {
-  fetchCategories,
-  updateCategories,
-  updateProducts
-} from './state/store.state'
+import { selectIsLoading } from './state/app.state'
+import { fetchCategories } from './state/store.state'
 import CategoryPage from './pages/category.page'
 import CheckoutPage from './pages/checkout.page'
 import CollectionPage from './pages/collection.page'
@@ -22,30 +18,14 @@ import LoginPage from './pages/login.page'
 class App extends React.Component {
   authUnsubscribe = null
   categoriesUnsubscribe = null
-  productsUnsubscribe = null
 
   componentDidMount() {
-    const {
-      setCurrentUser,
-      toggleLoading,
-      updateCategories,
-      updateProducts
-    } = this.props
+    const { fetchCategories, setCurrentUser } = this.props
 
     //
-    // DATABASE
+    // CATEGORIES
     //
-    const categoriesRef = firestore.collection('categories')
-    this.categoriesUnsubscribe = categoriesRef.onSnapshot(async (snapshot) => {
-      const fullCategories = await fetchCategories(snapshot.docs)
-      updateCategories(fullCategories)
-      toggleLoading(false)
-    })
-
-    const productsRef = firestore.collection('products')
-    this.productsUnsubscribe = productsRef.onSnapshot((snapshot) => {
-      updateProducts(snapshot)
-    })
+    this.categoriesUnsubscribe = fetchCategories()
 
     //
     // AUTH
@@ -71,12 +51,13 @@ class App extends React.Component {
   componentWillUnmount() {
     this.authUnsubscribe()
     this.categoriesUnsubscribe()
-    this.productsUnsubscribe()
   }
 
   render() {
+    const { currentUser, isLoading } = this.props
+
     return (
-      <div className={`${this.props.isLoading ? 'is-loading' : ''}`}>
+      <div className={`${isLoading ? 'is-loading' : ''}`}>
         <HeaderComponent />
 
         <Switch>
@@ -90,9 +71,7 @@ class App extends React.Component {
           <Route
             exact
             path='/login'
-            render={() =>
-              this.props.currentUser ? <Redirect to='/' /> : <LoginPage />
-            }
+            render={() => (currentUser ? <Redirect to='/' /> : <LoginPage />)}
           />
 
           <Route exact path='/checkout'>
@@ -122,9 +101,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-  toggleLoading: (isLoading) => dispatch(toggleLoading(isLoading)),
-  updateCategories: (categories) => dispatch(updateCategories(categories)),
-  updateProducts: (products) => dispatch(updateProducts(products))
+  fetchCategories: (categories) => dispatch(fetchCategories(categories))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

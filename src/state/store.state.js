@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect'
+import { firestore } from '../utils/firebase'
 
+import { setErrorMessage, toggleIsLoading } from './app.state'
 import actionTypes from './action-types'
 
 const INITIAL_STATE = {
@@ -10,14 +12,14 @@ const INITIAL_STATE = {
 //
 // ACTIONS
 //
-export const updateCategories = (categories) => ({
+const updateCategories = (categories) => ({
   type: actionTypes.store.UPDATE_CATEGORIES,
   payload: categories
 })
 
-export const updateProducts = (products) => ({
+const updateProducts = (products) => ({
   type: actionTypes.store.UPDATE_PRODUCTS,
-  payload: getCollectionSnapshotData(products)
+  payload: products
 })
 
 //
@@ -76,7 +78,45 @@ export const selectProducts = createSelector(
 //
 // UTILITIES
 //
-export const getCollectionSnapshotData = (collectionSnapshot) => {
+export const fetchCategories = (categories) => {
+  return (dispatch) => {
+    dispatch(toggleIsLoading(true))
+
+    const categoriesRef = firestore.collection('categories')
+    return categoriesRef.onSnapshot(
+      async (snapshot) => {
+        const hydratedCategories = await hydrateCategories(snapshot.docs)
+        dispatch(updateCategories(hydratedCategories))
+        dispatch(toggleIsLoading(false))
+      },
+      (error) => {
+        dispatch(setErrorMessage(error.message))
+        dispatch(toggleIsLoading(false))
+      }
+    )
+  }
+}
+
+export const fetchProducts = () => {
+  return (dispatch) => {
+    dispatch(toggleIsLoading(true))
+
+    const productsRef = firestore.collection('products')
+    return productsRef.onSnapshot(
+      (snapshot) => {
+        const products = getCollectionSnapshotData(snapshot)
+        dispatch(updateProducts(products))
+        dispatch(toggleIsLoading(false))
+      },
+      (error) => {
+        dispatch(setErrorMessage(error.message))
+        dispatch(toggleIsLoading(false))
+      }
+    )
+  }
+}
+
+const getCollectionSnapshotData = (collectionSnapshot) => {
   return collectionSnapshot.docs.map((docSnapshot) => {
     return {
       id: docSnapshot.id,
@@ -85,9 +125,8 @@ export const getCollectionSnapshotData = (collectionSnapshot) => {
   })
 }
 
-// TODO: convert to async redux action
-export const fetchCategories = async (categories) => {
-  const fullCategories = await Promise.all(
+const hydrateCategories = async (categories) => {
+  const hydratedCategories = await Promise.all(
     categories.map(async (category) => {
       // get the category data (minus the collections sub-collection)
       const catData = category.data()
@@ -109,7 +148,7 @@ export const fetchCategories = async (categories) => {
     })
   )
 
-  return fullCategories.reduce((accumulator, item) => {
+  return hydratedCategories.reduce((accumulator, item) => {
     accumulator[item['route']] = item
     return accumulator
   }, {})
