@@ -9,13 +9,13 @@ const INITIAL_STATE = {
 //
 // ACTIONS
 //
-export const setCurrentUser = (user) => ({
+export const setCurrentUser = user => ({
   type: actionTypes.user.SET_CURRENT_USER,
   payload: user
 })
 
 //
-// REDUCER
+// REDUCERS
 //
 export const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -33,9 +33,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
 //
 // SELECTORS
 //
-const selectUser = (state) => state.user
+const selectUser = state => state.user
 
-export const selectCurrentUser = createSelector(
-  selectUser,
-  (user) => user.currentUser
-)
+export const selectCurrentUser = createSelector(selectUser, user => user.currentUser)

@@ -1,0 +1,5 @@
+log: stdout
+tunnels:
+  app:
+    proto: http
+    addr: 3000

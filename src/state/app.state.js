@@ -10,24 +10,23 @@ const INITIAL_STATE = {
 //
 // ACTIONS
 //
-export const setErrorMessage = (errorMessage) => ({
+export const setErrorMessage = errorMessage => ({
   type: actionTypes.store.SET_ERROR_MESSAGE,
   payload: errorMessage
 })
 
-export const toggleIsLoading = (isLoading) => ({
+export const toggleIsLoading = isLoading => ({
   type: actionTypes.app.TOGGLE_IS_LOADING,
   payload: isLoading
 })
 
 //
-// REDUCER
+// REDUCERS
 //
 export const appReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.app.TOGGLE_IS_LOADING:
-      const isLoading =
-        action.payload === undefined ? !state.isLoading : action.payload
+      const isLoading = action.payload === undefined ? !state.isLoading : action.payload
 
       return {
         ...state,
@@ -48,11 +47,8 @@ export const appReducer = (state = INITIAL_STATE, action) => {
 //
 // SELECTORS
 //
-const selectApp = (state) => state.app
+const selectApp = state => state.app
 
-export const selectErrorMessage = createSelector(
-  selectApp,
-  (app) => app.errorMessage
-)
+export const selectErrorMessage = createSelector(selectApp, app => app.errorMessage)
 
-export const selectIsLoading = createSelector(selectApp, (app) => app.isLoading)
+export const selectIsLoading = createSelector(selectApp, app => app.isLoading)

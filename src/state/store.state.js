@@ -12,12 +12,12 @@ const INITIAL_STATE = {
 //
 // ACTIONS
 //
-const updateCategories = (categories) => ({
+const updateCategories = categories => ({
   type: actionTypes.store.UPDATE_CATEGORIES,
   payload: categories
 })
 
-const updateProducts = (products) => ({
+const updateProducts = products => ({
   type: actionTypes.store.UPDATE_PRODUCTS,
   payload: products
 })
@@ -47,49 +47,33 @@ export const storeReducer = (state = INITIAL_STATE, action) => {
 //
 // SELECTORS
 //
-const selectStore = (state) => state.store
+const selectStore = state => state.store
 
 const selectParams = (state, props) => props.match.params
 
-export const selectCategories = createSelector(
-  selectStore,
-  (store) => store.categories
-)
+export const selectCategories = createSelector(selectStore, store => store.categories)
 
-export const selectCollections = createSelector(
-  selectCategories,
-  selectParams,
-  (categories, params) =>
-    categories[params.category] ? categories[params.category].collections : []
-)
+export const selectCollections = createSelector(selectCategories, selectParams, (categories, params) => (categories[params.category] ? categories[params.category].collections : []))
 
-export const selectProducts = createSelector(
-  selectStore,
-  selectParams,
-  (store, params) => {
-    return store.products.filter(
-      (product) =>
-        product.categories.includes(params.category) &&
-        product.collections.includes(params.collection)
-    )
-  }
-)
+export const selectProducts = createSelector(selectStore, selectParams, (store, params) => {
+  return store.products.filter(product => product.categories.includes(params.category) && product.collections.includes(params.collection))
+})
 
 //
 // UTILITIES
 //
-export const fetchCategories = (categories) => {
-  return (dispatch) => {
+export const fetchCategories = categories => {
+  return dispatch => {
     dispatch(toggleIsLoading(true))
 
     const categoriesRef = firestore.collection('categories')
     return categoriesRef.onSnapshot(
-      async (snapshot) => {
+      async snapshot => {
         const hydratedCategories = await hydrateCategories(snapshot.docs)
         dispatch(updateCategories(hydratedCategories))
         dispatch(toggleIsLoading(false))
       },
-      (error) => {
+      error => {
         dispatch(setErrorMessage(error.message))
         dispatch(toggleIsLoading(false))
       }
@@ -98,17 +82,17 @@ export const fetchCategories = (categories) => {
 }
 
 export const fetchProducts = () => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(toggleIsLoading(true))
 
     const productsRef = firestore.collection('products')
     return productsRef.onSnapshot(
-      (snapshot) => {
+      snapshot => {
         const products = getCollectionSnapshotData(snapshot)
         dispatch(updateProducts(products))
         dispatch(toggleIsLoading(false))
       },
-      (error) => {
+      error => {
         dispatch(setErrorMessage(error.message))
         dispatch(toggleIsLoading(false))
       }
@@ -116,8 +100,8 @@ export const fetchProducts = () => {
   }
 }
 
-const getCollectionSnapshotData = (collectionSnapshot) => {
-  return collectionSnapshot.docs.map((docSnapshot) => {
+const getCollectionSnapshotData = collectionSnapshot => {
+  return collectionSnapshot.docs.map(docSnapshot => {
     return {
       id: docSnapshot.id,
       ...docSnapshot.data()
@@ -125,9 +109,9 @@ const getCollectionSnapshotData = (collectionSnapshot) => {
   })
 }
 
-const hydrateCategories = async (categories) => {
+const hydrateCategories = async categories => {
   const hydratedCategories = await Promise.all(
-    categories.map(async (category) => {
+    categories.map(async category => {
       // get the category data (minus the collections sub-collection)
       const catData = category.data()
 

@@ -2,34 +2,6 @@
   "name": "ecommerce",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5",
-    "@testing-library/react": "^10",
-    "@testing-library/user-event": "^12",
-    "dotenv": "^8",
-    "firebase": "^7",
-    "prop-types": "^15",
-    "react": "^16",
-    "react-dom": "^16",
-    "react-redux": "^7",
-    "react-router-dom": "^5",
-    "react-scripts": "^3",
-    "react-stripe-checkout": "^2",
-    "redux": "^4",
-    "redux-logger": "^3",
-    "redux-persist": "^6",
-    "redux-thunk": "^2.3.0",
-    "reselect": "^4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -42,7 +14,39 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5",
+    "@testing-library/react": "^11",
+    "@testing-library/user-event": "^12",
+    "dotenv": "^8",
+    "firebase": "^8",
+    "prop-types": "^15",
+    "react": "^17",
+    "react-dom": "^17",
+    "react-redux": "^7",
+    "react-router-dom": "^5",
+    "react-scripts": "^4",
+    "react-stripe-checkout": "^2",
+    "redux": "^4",
+    "redux-logger": "^3",
+    "redux-persist": "^6",
+    "redux-saga": "^1",
+    "reselect": "^4"
+  },
   "devDependencies": {
-    "node-sass": "^4"
+    "concurrently": "^6",
+    "ngrok": "^3",
+    "node-sass": "^5"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "scripts": {
+    "app": "concurrently --kill-others \"yarn:app-*\"",
+    "app-expose": "ngrok start app -config ./ngrok.yml",
+    "app-local": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   }
 }
